@@ -1,8 +1,176 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
+body{
+  font-family: 'Nunito', sans-serif;
+}
 a {
   color: #00B7FF;
+}
+
+.menu-header {
+  position: fixed;
+  width: 100%;
+  height: 100px;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+}
+.barramenu {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  height: 80%;
+  background-color: transparent;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*----------------------logo-----------------------*/
+
+.logo > a > img {
+  width: 100px;
+  max-height: 100%;
+  float: left;
+}
+
+.menu {
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  float: left;
+  margin: 10px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.menu > ul {
+
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+}
+
+.menu > ul > li {
+  float: left;
+  padding: 48px 33px;
+}
+
+.carrossel{
+  width: 100%;
+  min-height: 545px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-repeat: no-repeat;
+  background-position: center ;
+  background-size: cover;
+}
+
+.carrossel > img {
+  width: 100%;
+  height:100%;
+  min-height: 545px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-repeat: no-repeat;
+  background-position: center ;
+  background-size: cover;
+}
+
+/*---------*/
+.tabela {
+  grid-area: tabela;
+  display: flex;
+  flex: 1;
+  background-color: white;
+  border-style: solid;
+  border-color: rgb(58, 226, 43);
+  flex-direction: column;
+  line-height: 0.8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  padding-left: 10px;
+
+  width: 50%;
+}
+
+aside {
+  grid-area: aside;
+  width: 100%;
+  background-color: rgb(43, 226, 119);
+  color: white;
+  padding: 10px;
+  flex: 1;
+  line-height: 5px;
+  align-items: start;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px
+
+}
+
+main {
+  grid-area: main;
+  color: indianred;
+}
+
+h2 {
+  text-align: left;
+}
+
+.table-content{
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 0.9em;
+  width: 500px;
+  border-radius: 5px 5px 5px 5px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+.table-content thead tr{
+  background-color: rgb(110, 128, 93);
+  color: white;
+  text-align: left;
+  font-weight: bold;
+}
+
+.table-content th,.table-content td{
+  padding: 8px 9px;
+}
+
+.table-content tbody tr{
+  border-bottom: 1px solid #dddddd;
+}
+.table-content tbody tr:last-of-type{
+  border-bottom: 2px solid rgb(96, 122, 70);
+}
+
+.table-content tbody tr:nth-child(odd) {
+  background-color: #eee;
+}
+
+.table-content tbody tr:nth-child(odd) {
+ background-color: #fff;
+}
+
+.table-content tbody td button{
+  border-radius: 5px;
+  color:#111;
+  cursor: pointer;
+  outline: none;
+}
+
+footer{
+  padding: 10px;
+  right: 10px;
+  color: white;
+  text-align: center;
+  background: #2e643c;
+  position: relative;
+  width: 100%;
 }
