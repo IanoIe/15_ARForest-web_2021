@@ -5,8 +5,8 @@ var pool = mysql.createPool({
     connectionLimit: 20,
     host: 'localhost',
     user: 'root',
-    password: '.....',
-    database: 'amamam'
+    password: 'Mamae1986',
+    database: 'arforest_web'
 });
 
 // Ping database to check for common exception errors.
