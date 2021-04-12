@@ -28,7 +28,7 @@ function registar(){
         },
         success: function(result, status) {
             console.log('Success')
-            window.location = "login.html";
+            window.location = "index.html";
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);

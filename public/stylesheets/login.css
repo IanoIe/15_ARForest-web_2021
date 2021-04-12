@@ -13,7 +13,7 @@ body{
     height: 480px;
     position: relative;
     margin: 6% auto;
-    background: #e7edf3;
+    background: #ffffff;
     padding: 5px;
     overflow: hidden;
 }
@@ -22,7 +22,7 @@ body{
     width: 220px;
     margin: 35px auto;
     position: relative;
-    box-shadow: 0 0 20px 9px #6e645f1f;
+    box-shadow: 0 0 20px 9px #ff61241f;
     border-radius: 30px;
 }
 
@@ -42,7 +42,7 @@ body{
     position: absolute;
     width: 110px;
     height: 100%;
-    background: linear-gradient(to right,#9db2b8,#5c8b60);
+    background: linear-gradient(to right,#00c9ff,#92fe9d);
     border-radius: 30px;
     transition: 0.5s;
 }
@@ -86,7 +86,7 @@ body{
     cursor: pointer;
     display: block;
     margin: auto;
-    background: linear-gradient(to right,#9fa8aa,#92fe9d);
+    background: linear-gradient(to right,#00c9ff,#92fe9d);
     border: 0;
     outline: none;
     border-radius: 30px;
@@ -109,12 +109,13 @@ body.login span{
 #register{
     left: 450px;
 }
+
 footer{
-    padding: 10px;
-    right: 10px;
+    padding: 20px;
+    right: 20px;
     color: white;
     text-align: center;
-    background: #2e643c;
+    background: #00e03d;
     position: relative;
     width: 100%;
 }
