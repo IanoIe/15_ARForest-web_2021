@@ -267,8 +267,110 @@ header .fa-bars{
 }
 
 .service .box-container .box:hover{
-  box-shadow: 0 .3rem .5rem rgba(0,0,0.-3);
+  box-shadow: 0 .3rem .5rem rgba(0,0,0,.3);
 }
+
+.project{
+  background: #333;
+  min-height: 100vh;
+}
+
+.project .heading{
+  color: #fff;
+}
+
+.project .box-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.project .box-container .box{
+  flex: 1 1 30rem;
+  height: 22rem;
+  box-shadow: 0 .3rem .5rem #000;
+  overflow: hidden;
+  position: relative;
+  margin: 1rem;
+}
+
+.project .box-container .box img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.project .box-container .box .icons{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 100%; left: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  background: linear-gradient(transparent, rgba(0,0,0,.7));
+  transform: scale(0);
+}
+
+.project .box-container .box:hover .icons{
+  top: 0;
+  transform: scale(1);
+}
+
+.project .box-container .box .icons a{
+  font-size: 3rem;
+  color: #fff;
+  margin: 3rem 0;
+  text-shadow: 0 .3rem .5rem #000;
+  transform: translateY(13rem);
+  transition-delay: calc(.2s * var(--i));
+}
+
+.project .box-container .box:hover .icons a{
+  transform: translateY(0rem);
+}
+
+
+.donate{
+  position: relative;
+  z-index: 0;
+  min-height: 100vh;
+  padding-bottom: 3rem;
+}
+
+.donate .heading{
+  color: #fff;
+}
+
+.donate .video-container video{
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.donate .form-container form{
+  width: 80%;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, .1);
+  backdrop-filter: blur(.4rem);
+  box-shadow: 0 .3rem .5rem #000;
+  text-align: center;
+  border-top: .1rem solid rgba(255, 255, 255, .3);
+  border-left: .1rem solid rgba(255, 255, 255, .3);
+}
+
+
+
+
+
 
 
 
