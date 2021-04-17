@@ -6,7 +6,7 @@ menu.addEventListener('click', function(){
     navbar.classList.toggle('nav-toggle');
 });
 
-window.addEventListener('scroll' () =>{
+window.addEventListener('scroll', () =>{
     menu.classList.remove('fa-times');
     navbar.classList.remove('nav-toggle');
 });
