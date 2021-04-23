@@ -9,7 +9,7 @@ function entrar(){
         success: function(result, status) {
             alert('Login feito com sucesso!')
             localStorage.setItem("email", document.getElementById("email").value);
-            window.location = "pagPrincipal.html";
+            window.location = "main.html";
         },
         error: function(jqXHR, textStatus, errorThron) {
             console.log(errorThrown);

@@ -185,6 +185,7 @@ header .fa-bars{
     font-size: 1.5rem;
     color:#666;
     padding:1rem 0;
+    text-transform: none;
 }
 
 .about .box-container{
@@ -339,5 +340,4 @@ footer{
     .service .box-container{
         width: auto;
     }
-
 }
