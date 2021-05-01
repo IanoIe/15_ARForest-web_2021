@@ -32,7 +32,69 @@ header .logo{
     font-size: 3rem;
 }
 
+header .navbar ul{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+}
 
+header .navbar ul li{
+    margin:0 1rem;
+}
+
+header .navbar ul li a{
+    font-size: 2rem;
+    color:#666;
+}
+
+header .navbar ul li a:hover{
+    color:var(--green);
+}
+
+header .fa-bars{
+    font-size: 3rem;
+    color:#666;
+    cursor: pointer;
+    display: none;
+}
+
+#map{
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    top: 200;
+    left: 0px;
+    height: 100%;
+    width: 700px;
+}
+
+body {
+    
+    background-color: white;
+}
+#filtros{
+    position: absolute;
+    margin-top: 200px;
+    right: 500px;  
+    width: 300px;
+    height: 400px;
+}
+
+.submit-btn{
+    widows: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(to right,#97d5e7,#69d372);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    color: #fff;
+}
+
+/* Rodapé  */
 footer{
     padding: 30px;
     color: white;
@@ -43,12 +105,3 @@ footer{
     width: 100%;
 }
 
-*::selection{
-    background:var(--green);
-    color:#fff;
-}
-
-html{
-    font-size: 62.5%;
-    overflow-x: hidden;
-}

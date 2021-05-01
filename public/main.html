@@ -1,23 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="uft-8">
         <title>ARForest Web | Página Principal</title>
         <link rel="icon" href="images/logo.PNG">
-        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="stylesheet" href="stylesheets/main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+        <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
     </head>
 </html>
 
 <body>
     <header>
         <div class="logo"><a href="main.html"><img src="images/logo.PNG"></a></div>
+        <nav class="navbar">
+            <ul>
+              <li><a href="index.html">Logout</a></li>
+            </ul>
+          </nav>
+          <div class="fas fa-bars"></div>
     </header>
 
-    
+    <main>
+        <div id="map">
+            <script src="javascripts/leaflet-routing-machine.js"></script>
+            <script src="javascripts/map.js"></script>
+        </div>
+
+        <div id="filtros">
+            <h1>Filtros</h1><br>
+            <div class="select">
+                <label for="estado">Estado: </label>
+                <select name="estado" id="estado">
+                    <option value="">--Escolha um Estado--</option>
+                    <option value="Limpo">Limpo</option>
+                    <option value="Semi-Limpo">Semi-Limpo</option>
+                    <option value="Sujo">Sujo</option>
+                </select>
+            </div>
+            <br>
+
+            <div class="select">
+                <label for="autor">Autor: </label>
+                <input type="text" id="autor" name="autor">
+            </div>
+            <br>
+
+            <div class="select">
+                <label for="categoria">Categoria: </label>
+                <select name="categoria" id="categoria">
+                    <option value="">--Escolha uma Categoria--</option>
+                    <option value="nome">Nome </option>
+                </select>
+            </div>
+            <br>
+
+            <div class="select">
+                <label for="date-inicial">Data de Inicio: </label>
+                <input type="date" id="date-inicial" name="date-inicial">
+            </div>
+            <br>
+            
+            <div class="select">
+                <label for="date-final">Data de Fim: </label>
+                <input type="date" id="date-final" name="date-final">
+            </div>
+            <br>
+            
+            
+            <button type="button" class="submit-btn">Filtrar</button>
+        </div>
 
 
+    </main>
+
+
+
+    <!-- Rodapé -->
     <footer>
         <p>ARForest Web, Copyright &copy; 2021</p>
     </footer>
 </body>
+</html>
