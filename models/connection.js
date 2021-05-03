@@ -3,10 +3,10 @@ var util = require('util');
 
 var pool = mysql.createPool({
     connectionLimit: 20,
-    host: 'localhost',
-    user: 'root',
-    password: 'Mamae1986',
-    database: 'arforest_web'
+    host: 'remotemysql.com',
+    user: 'MCNfC7hGRV',
+    password: 'kRAbA0Y3MW',
+    database: 'MCNfC7hGRV'
 });
 
 // Ping database to check for common exception errors.
