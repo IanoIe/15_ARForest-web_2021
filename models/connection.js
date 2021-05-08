@@ -4,9 +4,9 @@ var util = require('util');
 var pool = mysql.createPool({
     connectionLimit: 20,
     host: 'remotemysql.com',
-    user: 'MCNfC7hGRV',
-    password: 'kRAbA0Y3MW',
-    database: 'MCNfC7hGRV'
+    user: 'Cm3LXQyxTk',
+    password: 'bPD8lLTv48',
+    database: 'Cm3LXQyxTk'
 });
 
 // Ping database to check for common exception errors.
@@ -26,7 +26,7 @@ pool.getConnection((err, connection) => {
     if (connection) connection.release()
     return
 })
-
+// Promisify for Node.js async/await.
 pool.query = util.promisify(pool.query);
 
-module.exports = pool;
+module.exports.pool = pool;

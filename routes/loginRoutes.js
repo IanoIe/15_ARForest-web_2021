@@ -15,7 +15,7 @@ router.post('/login', function (req, res, next){
 });
 
 /**Router de Registar*/
-router.post('/registar', function (req, res, next) {
+router.post('/register', function (req, res, next) {
   logModel.registar(req.body, function (status, result) {
     if (status.code == 200)
     res.send(result);

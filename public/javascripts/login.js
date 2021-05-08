@@ -19,16 +19,16 @@ function entrar(){
 
 function registar(){
     $.ajax({
-        url: '/api/auth/registar', 
+        url: '/api/auth/register', 
         method: 'post',
         data: {
             Nome:document.getElementById("nome").value,
-            Email:document.getElementById("email").value,
+            Email:document.getElementById("emailRegistar").value,
             Senha:document.getElementById("senha").value,
         },
         success: function(result, status) {
             console.log('Success')
-            window.location = "index.html";
+            window.location = "login.html";
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);
