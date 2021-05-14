@@ -40,3 +40,4 @@ module.exports.registar = function (obj, callback, next){
     })
 }
 
+
