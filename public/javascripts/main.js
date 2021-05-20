@@ -1,29 +1,55 @@
+var marcadores = []
+var fotos = []
+var mapa
 
 window.onload = function(){
-    var mapa = carregarMapa();
-    carregarFotos(mapa);
+    carregarMapa();
+    carregarFotos();
       
 }
 
-function carregaFotosMapa(mapa, fotos){
-    console.log(fotos)
+function carregaFotosMapa(fotos){
+    // Apagar os punto no mapa antes de preencher de novo
+    marcadores.forEach(function(m){
+        mapa.removeLayer(m)
+    })
+    // Criar novo icon para marcado
+    var icon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      });
+    // alterar o url dependendo do estado (altera a cor)
     for (i=0; i<fotos.length; i++){
-        console.log(fotos[i].Url)
-        var marcador = L.marker([fotos[i].Latitude, fotos[i].Longitude]).addTo(mapa)
+        if (fotos[i].nomeEstado == 'Sujo'){
+            icon.options.iconUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png'
+        }else if (fotos[i].nomeEstado == 'Semi-Limpo'){
+            icon.options.iconUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png'
+        }else{
+            icon.options.iconUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png'
+        }
+        var marcador = L.marker([fotos[i].Latitude, fotos[i].Longitude], {icon: icon}).addTo(mapa)
+        marcadores.push(marcador)
 
         imagemPopup = document.createElement("img");
         imagemPopup.src = fotos[i].Url
         imagemPopup.width = '100'
         imagemPopup.height = '100'
 
-        textPopup = document.createElement("li")
-        estado = document.createTextNode("Estado: " + fotos[i].nomeEstado)
-        textPopup.appendChild(estado)
-        categoria = document.createTextNode("Categoria: " + fotos[i].nomeCategoria)
-        textPopup.appendChild(categoria)
-        data = document.createTextNode("Data: " + fotos[i].Data)
-        textPopup.appendChild(data)
-
+        textPopup = document.createElement("div")
+        var d = new Date(fotos[i].Data)
+        var dia = d.getDate()
+        var mes = d.getMonth()+1
+        var ano = d.getFullYear()
+        textPopup.innerHTML = "<ul>"+
+                                    "<li>Autor: "+fotos[i].nomeAutor+"</li>"+
+                                    "<li>Estado: "+fotos[i].nomeEstado+"</li>"+
+                                    "<li>Categoria: "+fotos[i].nomeCategoria+"</li>"+
+                                    "<li>Data: "+dia+"/"+mes+"/"+ano+"</li>"+
+                               "</ul>"
         infoPopup = document.createElement("div")
         infoPopup.appendChild(imagemPopup)
         infoPopup.appendChild(textPopup)
@@ -31,12 +57,50 @@ function carregaFotosMapa(mapa, fotos){
         marcador.bindPopup(infoPopup, {
             maxWidth: "auto"
         });
-    } 
+
+        marcador.on('mouseover', function(e){
+            this.openPopup()
+        })
+    }
 }
 
+var e = {Estado: "Sujo", Categoria: 3}
+function filtrarFotos(){
+    console.log(fotos)
+    var selectEstado = document.getElementById('estado').value
+    var selectCategoria = document.getElementById('categoria').value
+    var textAutor = document.getElementById('autor').value
+    
+    var filtro = {}
+    if (selectEstado != ""){
+        filtro.nomeEstado = selectEstado
+    }
+    if (selectCategoria != ""){
+        filtro.nomeCategoria = selectCategoria
+    }
+    if (textAutor != ""){
+        filtro.nomeAutor = textAutor
+    }
+    
+    fotosFiltradas = []
+    var fotoPassa = true
+    for (i = 0; i < fotos.length; i++){
+        for(var key in filtro){
+            if (fotos[i][key] != filtro[key]){
+                fotoPassa = false
+            }
+        }
+        if (fotoPassa){
+            fotosFiltradas.push(fotos[i])
+        }
+        fotoPassa = true
+    }
+    carregaFotosMapa(fotosFiltradas)
+
+}
 
 function carregarMapa(){
-    var mapa = L.map('map')
+    mapa = L.map('map')
     var attribution = '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors';
     var tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     var tiles = L.tileLayer(tileUrl, { attribution });
@@ -49,17 +113,18 @@ function carregarMapa(){
                       /**Cordenadas da localização de Santos */
         mapa.setView([38.70689937357626, -9.155871477142364], 8);
     }
-    return mapa;
 }
 
-function carregarFotos(mapa){
+function carregarFotos(){
     $.ajax({
         url: "/api/carregarFotos/",
         method: "get",
         success: function(resultado){
             fotos = resultado;
-            carregaFotosMapa(mapa, fotos) 
+            carregaFotosMapa(fotos) 
         }
     })
 }
+
+
 

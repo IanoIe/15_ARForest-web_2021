@@ -8,7 +8,7 @@ module.exports.getFotos = function (obj, callback, next) {
             conn.release();
             next(err);
         }
-        query = "select idFotografias, Url, Classificacao, Latitude, Longitude, Data, idUtilizador"+
+        query = "select nomeUtilizador as nomeAutor, Url, Classificacao, Latitude, Longitude, Data, idUtilizador"+
         ", nomeEstado, nomeCategoria from Fotografias inner join Categoria on idCategoria = Fotografias_idCategoria"+
         " inner join Utilizador on idUtilizador = Fotografias_idUtilizador inner join Estado on Fotografias_idEstado = idEstado";
         

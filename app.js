@@ -5,7 +5,6 @@ var logger = require('morgan');
 
 
 var loginRouter = require('./routes/loginRoutes');
-var utilizadorRouter = require('./routes/utilizadorRoutes');
 var fotografiasRouter = require("./routes/fotografiaRoutes")
 
 var app = express();
@@ -18,7 +17,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/api/auth', loginRouter);
-app.use('/api/auth', utilizadorRouter);
 app.use('/api/carregarFotos', fotografiasRouter);
 
 module.exports = app;
