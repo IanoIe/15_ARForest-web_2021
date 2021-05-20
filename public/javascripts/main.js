@@ -1,5 +1,4 @@
 
-
 window.onload = function(){
     var mapa = carregarMapa();
     carregarFotos(mapa);
