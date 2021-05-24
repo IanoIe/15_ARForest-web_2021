@@ -24,8 +24,7 @@ module.exports.getFotos = function (obj, callback, next) {
                 }
                 query += key + "=?";
             }
-        }
-        
+        }       
         conn.query(query, values, function (err, rows) {
             conn.release();
             if(err){

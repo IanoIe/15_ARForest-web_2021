@@ -45,10 +45,10 @@ function carregaFotosMapa(fotos){
         var mes = d.getMonth()+1
         var ano = d.getFullYear()
         textPopup.innerHTML = "<ul>"+
-                                    "<li>Autor: "+fotos[i].nomeAutor+"</li>"+
-                                    "<li>Estado: "+fotos[i].nomeEstado+"</li>"+
-                                    "<li>Categoria: "+fotos[i].nomeCategoria+"</li>"+
-                                    "<li>Data: "+dia+"/"+mes+"/"+ano+"</li>"+
+                 "<li>Autor: "+fotos[i].nomeAutor+"</li>"+
+                 "<li>Estado: "+fotos[i].nomeEstado+"</li>"+
+                 "<li>Categoria: "+fotos[i].nomeCategoria+"</li>"+
+                 "<li>Data: "+dia+"/"+mes+"/"+ano+"</li>"+
                                "</ul>"
         infoPopup = document.createElement("div")
         infoPopup.appendChild(imagemPopup)

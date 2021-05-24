@@ -82,6 +82,10 @@ body {
 }
 
 .submit-btn{
+    position: absolute;
+    bottom: 140px;
+    right: 10px;
+    border-top: 100px;
     padding: 10px 30px;
     cursor: pointer;
     display: block;
