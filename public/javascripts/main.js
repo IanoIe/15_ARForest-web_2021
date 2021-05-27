@@ -2,10 +2,28 @@ var marcadores = []
 var fotos = []
 var mapa
 
+var conteudoModel;
+
 window.onload = function(){
+    document.getElementById('nomeUtilizador').innerHTML = localStorage.getItem('nomeUtilizador')
+    conteudoModel = document.getElementById("conteudoModel")
+    // função para fechar janela popup na cruz
+    document.getElementById("botaoFechar").onclick = function() {
+        document.getElementById("modal").style.display = "none";
+    }
+    // função para fechar janela popup carregando fora da janela
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("modal")) {
+            document.getElementById("modal").style.display = "none";
+        }
+    }
     carregarMapa();
-    carregarFotos();
-      
+    carregarFotos();  
+}
+
+function abrirJanelaValidarFoto(foto){
+    //conteudoModel.innerHTML = "<img src='"+foto.Url+"'>";
+    document.getElementById("modal").style.display = "block";
 }
 
 function carregaFotosMapa(fotos){
@@ -53,7 +71,10 @@ function carregaFotosMapa(fotos){
         infoPopup = document.createElement("div")
         infoPopup.appendChild(imagemPopup)
         infoPopup.appendChild(textPopup)
-        
+        infoPopup.style.cursor = 'pointer'
+        infoPopup.onclick = function(){
+            abrirJanelaValidarFoto(fotos[i])
+        }
         marcador.bindPopup(infoPopup, {
             maxWidth: "auto"
         });

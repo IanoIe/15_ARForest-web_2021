@@ -6,7 +6,7 @@ module.exports.login = function (obj, callback, next) {
             conn.release();
             next(err);
         }
-        else conn.query("Select Email, Senha from Utilizador where Email=? and Senha=?", [obj.Email, obj.Senha], function (err, rows) {
+        else conn.query("Select idUtilizador, nomeUtilizador, Email, Senha from Utilizador where Email=? and Senha=?", [obj.Email, obj.Senha], function (err, rows) {
             console.log("Email")
             console.log(rows);
             console.log(obj);
@@ -20,7 +20,6 @@ module.exports.login = function (obj, callback, next) {
         })
     })
 }
-
 
 module.exports.registar = function (obj, callback, next){
     mysql.getConnection(function(err, conn){

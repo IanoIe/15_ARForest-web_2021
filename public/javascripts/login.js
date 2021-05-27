@@ -8,7 +8,8 @@ function entrar(){
         },
         success: function(result, status) {
             alert('Login feito com sucesso!')
-            localStorage.setItem("email", document.getElementById("email").value);
+            localStorage.setItem("nomeUtilizador", result[0].nomeUtilizador);
+            localStorage.setItem("idUtilizador", result[0].idUtilizador);
             window.location = "main.html";
         },
         error: function(jqXHR, textStatus, errorThron) {
