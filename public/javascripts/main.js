@@ -9,21 +9,36 @@ window.onload = function(){
     conteudoModel = document.getElementById("conteudoModel")
     // função para fechar janela popup na cruz
     document.getElementById("botaoFechar").onclick = function() {
-        document.getElementById("modal").style.display = "none";
+        limparJanelaValidarFoto()
     }
     // função para fechar janela popup carregando fora da janela
     window.onclick = function(event) {
         if (event.target == document.getElementById("modal")) {
-            document.getElementById("modal").style.display = "none";
+            limparJanelaValidarFoto()
         }
     }
     carregarMapa();
     carregarFotos();  
 }
+// Limpa imagem conteudo do model e faz-o desaparecer
+function limparJanelaValidarFoto(){
+    document.getElementById("modal").style.display = "none";
+    while (conteudoModel.children.length > 1){
+        conteudoModel.removeChild(conteudoModel.children[conteudoModel.children.length-1])
+    }
+} 
 
 function abrirJanelaValidarFoto(foto){
-    //conteudoModel.innerHTML = "<img src='"+foto.Url+"'>";
-    document.getElementById("modal").style.display = "block";
+    const img = new Image();
+    img.onload = function(){
+        this.height = this.height*(600/this.width)
+        this.width = 600
+        conteudoModel.appendChild(img)
+        textoInfo = document.createElement('div')
+        textoInfo.innerHTML = "<p></p>"
+        document.getElementById("modal").style.display = "block" 
+    }
+    img.src = foto.Url
 }
 
 function carregaFotosMapa(fotos){
@@ -72,8 +87,9 @@ function carregaFotosMapa(fotos){
         infoPopup.appendChild(imagemPopup)
         infoPopup.appendChild(textPopup)
         infoPopup.style.cursor = 'pointer'
+        infoPopup.value = i
         infoPopup.onclick = function(){
-            abrirJanelaValidarFoto(fotos[i])
+            abrirJanelaValidarFoto(fotos[this.value])
         }
         marcador.bindPopup(infoPopup, {
             maxWidth: "auto"
@@ -142,6 +158,7 @@ function carregarFotos(){
         method: "get",
         success: function(resultado){
             fotos = resultado;
+            console.log(fotos)
             carregaFotosMapa(fotos) 
         }
     })

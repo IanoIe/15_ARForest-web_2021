@@ -8,9 +8,11 @@ module.exports.getFotos = function (obj, callback, next) {
             conn.release();
             next(err);
         }
-        query = "select nomeUtilizador as nomeAutor, Url, Classificacao, Latitude, Longitude, Data, idUtilizador"+
-        ", nomeEstado, nomeCategoria from Fotografias inner join Categoria on idCategoria = Fotografias_idCategoria"+
-        " inner join Utilizador on idUtilizador = Fotografias_idUtilizador inner join Estado on Fotografias_idEstado = idEstado";
+        query = "select nomeUtilizador as nomeAutor, Url, Classificacao, Latitude, Longitude, Data, idUtilizador,"+
+        " nomeEstado, nomeCategoria, Titulo, Texto, Comentarios_idUtilizador as idAutorComentario"+ 
+        " from Fotografias inner join Categoria on idCategoria = Fotografias_idCategoria"+
+        " inner join Utilizador on idUtilizador = Fotografias_idUtilizador inner join Estado on Fotografias_idEstado = idEstado"+
+        " inner join Comentarios on Comentarios_idFotografias = idFotografias;"
         
         var values = [];
         if (obj){
@@ -31,7 +33,27 @@ module.exports.getFotos = function (obj, callback, next) {
                 callback({ code: 401, status: err }, null);
                 return
             }
-            callback({ code: 200, status: "Ok" }, rows);
+            result = []
+            id = -1
+            for (i=0; i<rows.length; i++){
+                if (rows[i].idUtilizador != id){
+                    result.push({'idUtilizador': rows[i].idUtilizador,
+                                    'nomeAutor': rows[i].nomeAutor,
+                                    'Url': rows[i].Url,
+                                    'Classificacao': rows[i].Classificacao,
+                                    'Latitude': rows[i].Latitude,
+                                    'Longitude': rows[i].Longitude,
+                                    'Data': rows[i].Data,
+                                    'nomeEstado': rows[i].nomeEstado,
+                                    'nomeCategoria': rows[i].nomeCategoria})
+                    result[result.length-1].Comentarios = []
+                    id = rows[i].idUtilizador
+                }
+                result[result.length-1].Comentarios.push({'Titulo': rows[i].Titulo, 
+                                                                'Texto': rows[i].Texto, 
+                                                                'idAutorComentario': rows[i].idAutorComentario})
+            }
+            callback({ code: 200, status: "Ok" }, result);
         })
     })
 }
