@@ -2,11 +2,17 @@ var marcadores = []
 var fotos = []
 var mapa
 
-var conteudoModel;
+var conteudoModel
+var conteudoImagem;
+var descricaoModel;
+var comentariosModel;
 
 window.onload = function(){
     document.getElementById('nomeUtilizador').innerHTML = localStorage.getItem('nomeUtilizador')
     conteudoModel = document.getElementById("conteudoModel")
+    conteudoImagem = document.getElementById("conteudoImagem")
+    descricaoModel = document.getElementById("descricao")
+    comentariosModel = document.getElementById("comentarios")
     // função para fechar janela popup na cruz
     document.getElementById("botaoFechar").onclick = function() {
         limparJanelaValidarFoto()
@@ -23,9 +29,7 @@ window.onload = function(){
 // Limpa imagem conteudo do model e faz-o desaparecer
 function limparJanelaValidarFoto(){
     document.getElementById("modal").style.display = "none";
-    while (conteudoModel.children.length > 1){
-        conteudoModel.removeChild(conteudoModel.children[conteudoModel.children.length-1])
-    }
+    conteudoImagem.removeChild(conteudoImagem.children[conteudoImagem.children.length-1])
 } 
 
 function abrirJanelaValidarFoto(foto){
@@ -33,12 +37,47 @@ function abrirJanelaValidarFoto(foto){
     img.onload = function(){
         this.height = this.height*(600/this.width)
         this.width = 600
-        conteudoModel.appendChild(img)
-        textoInfo = document.createElement('div')
-        textoInfo.innerHTML = "<p></p>"
+        conteudoImagem.appendChild(img)
+        var d = new Date(foto.Data)
+        var dia = d.getDate()
+        var mes = d.getMonth()+1
+        var ano = d.getFullYear()
+        descricaoModel.innerHTML = "<p>Autor: "+foto.nomeAutor+"</p>"+
+                                   "<p>Estado: "+foto.nomeEstado+"</p>"+
+                                   "<p>Categoria: "+foto.nomeCategoria+"</p>"+
+                                   "<p>Data: "+dia+"/"+mes+"/"+ano+"</p>"
+        for (i=0; i<foto.Comentarios.length; i++){
+            comentario = document.createElement('div')
+            comentario.classList.add("comentario")
+            comentario.innerHTML = "<div style='display: flex; flex-direction:row; justify-content: space-between'>"+
+                                        "<div style='font-weight:bold'>"+foto.Comentarios[i].Titulo+"</div>"+
+                                        "<div style='color:green'>"+5+"</div>"+
+                                    "</div>"+
+                                    "<p style='font-size:12px'>"+foto.Comentarios[i].Texto+"</p>"
+            comentariosModel.appendChild(comentario)
+        }
         document.getElementById("modal").style.display = "block" 
     }
     img.src = foto.Url
+}
+
+function submeterComentario(idUtilizador, idFoto, comentario){
+    $.ajax({
+        url: '/api/auth/register', 
+        method: 'post',
+        data: {
+            Nome:document.getElementById("nome").value,
+            Email:document.getElementById("emailRegistar").value,
+            Senha:document.getElementById("senha").value,
+        },
+        success: function(result, status) {
+            console.log('Success')
+            window.location = "login.html";
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    })
 }
 
 function carregaFotosMapa(fotos){
@@ -46,7 +85,7 @@ function carregaFotosMapa(fotos){
     marcadores.forEach(function(m){
         mapa.removeLayer(m)
     })
-    // Criar novo icon para marcado
+    // Criar novo icon para marcador
     var icon = new L.Icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -101,7 +140,6 @@ function carregaFotosMapa(fotos){
     }
 }
 
-var e = {Estado: "Sujo", Categoria: 3}
 function filtrarFotos(){
     console.log(fotos)
     var selectEstado = document.getElementById('estado').value

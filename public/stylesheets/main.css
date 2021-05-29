@@ -81,7 +81,7 @@ body {
     height: 400px;
 }
 
-.submit-btn{
+.filter-btn{
     position: absolute;
     bottom: 140px;
     right: 10px;
@@ -97,6 +97,20 @@ body {
     color: #fff;
 }
 
+.submit-btn{
+    padding: 10px 30px;
+    cursor: pointer;
+    margin: auto;
+    background: linear-gradient(to right,#97d5e7,#69d372);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    color: #fff;
+}
+
+#caixaComentar {
+    width: 350px;
+}
 
 #modal {
     display: none; /* Hidden by default */
@@ -120,6 +134,39 @@ body {
     border: 1px solid #888;
     width: 70%;
   }
+
+#conteudo {
+    display: flex;
+    flex-direction: row;
+    flex-flow: space-around; 
+}
+
+#conteudoTexto {
+    display: flex;
+    flex-direction: column;
+    flex-flow: space-around;
+    padding-left: 50px;
+}
+
+#comentarios {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    border-style: solid;
+    overflow: auto;
+    width: 350px;
+    height: 150px;
+}
+
+.comentario {
+    margin: 12px;
+    border-bottom: solid;
+    border-width: 0.2px;
+    
+}
+
   
   /* The Close Button */
  #botaoFechar {

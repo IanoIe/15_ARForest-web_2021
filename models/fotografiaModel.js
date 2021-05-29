@@ -8,7 +8,7 @@ module.exports.getFotos = function (obj, callback, next) {
             conn.release();
             next(err);
         }
-        query = "select nomeUtilizador as nomeAutor, Url, Classificacao, Latitude, Longitude, Data, idUtilizador,"+
+        query = "select idFotografias, nomeUtilizador as nomeAutor, Url, Classificacao, Latitude, Longitude, Data, idUtilizador,"+
         " nomeEstado, nomeCategoria, Titulo, Texto, Comentarios_idUtilizador as idAutorComentario"+ 
         " from Fotografias inner join Categoria on idCategoria = Fotografias_idCategoria"+
         " inner join Utilizador on idUtilizador = Fotografias_idUtilizador inner join Estado on Fotografias_idEstado = idEstado"+
@@ -38,6 +38,7 @@ module.exports.getFotos = function (obj, callback, next) {
             for (i=0; i<rows.length; i++){
                 if (rows[i].idUtilizador != id){
                     result.push({'idUtilizador': rows[i].idUtilizador,
+                                    'idFotografias': rows[i].idFotografias,
                                     'nomeAutor': rows[i].nomeAutor,
                                     'Url': rows[i].Url,
                                     'Classificacao': rows[i].Classificacao,

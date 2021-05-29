@@ -62,11 +62,24 @@
                 </select>
             </div>           
 
-            <button onclick = 'filtrarFotos()' id = "botaoFiltrar" type="button" class="submit-btn">Filtrar</button>
+            <button onclick = 'filtrarFotos()' id = "botaoFiltrar" type="button" class="filter-btn">Filtrar</button>
         </div>
         <div id="modal">
             <div id="conteudoModel" class="modal-content">
               <span id="botaoFechar">&times;</span>
+              <div id="conteudo">
+                  <div id="conteudoImagem"></div>
+                  <div id="conteudoTexto">
+                      <div id="descricao"></div>
+                      <div id="comentarios"></div>
+                      <div style='margin: 10px auto;'>
+                          <p>Comentar:</p>
+                          <textarea id="caixaComentar"></textarea>
+                      </div>
+                      <div id="validacao"></div>
+                      <button onclick='submeterComentario()' type="button" class="submit-btn">Submeter</button>
+                  </div>
+              </div>
             </div>
           
           </div>
