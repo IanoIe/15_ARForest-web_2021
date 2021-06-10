@@ -12,7 +12,7 @@ module.exports.getFotos = function (obj, callback, next) {
         " nomeEstado, nomeCategoria, Titulo, Texto, Comentarios_idUtilizador as idAutorComentario"+ 
         " from Fotografias inner join Categoria on idCategoria = Fotografias_idCategoria"+
         " inner join Utilizador on idUtilizador = Fotografias_idUtilizador inner join Estado on Fotografias_idEstado = idEstado"+
-        " inner join Comentarios on Comentarios_idFotografias = idFotografias;"
+        " left join Comentarios on Comentarios_idFotografias = idFotografias;"
         
         var values = [];
         if (obj){
@@ -33,10 +33,11 @@ module.exports.getFotos = function (obj, callback, next) {
                 callback({ code: 401, status: err }, null);
                 return
             }
+            console.log(rows)
             result = []
             id = -1
             for (i=0; i<rows.length; i++){
-                if (rows[i].idUtilizador != id){
+                if (rows[i].idFotografias != id){
                     result.push({'idUtilizador': rows[i].idUtilizador,
                                     'idFotografias': rows[i].idFotografias,
                                     'nomeAutor': rows[i].nomeAutor,
@@ -50,9 +51,11 @@ module.exports.getFotos = function (obj, callback, next) {
                     result[result.length-1].Comentarios = []
                     id = rows[i].idUtilizador
                 }
-                result[result.length-1].Comentarios.push({'Titulo': rows[i].Titulo, 
-                                                                'Texto': rows[i].Texto, 
-                                                                'idAutorComentario': rows[i].idAutorComentario})
+                if(rows[i].Texto){
+                    result[result.length-1].Comentarios.push({'Titulo': rows[i].Titulo, 
+                                                              'Texto': rows[i].Texto, 
+                                                              'idAutorComentario': rows[i].idAutorComentario})
+                }
             }
             callback({ code: 200, status: "Ok" }, result);
         })

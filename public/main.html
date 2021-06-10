@@ -39,9 +39,10 @@
                 <label for="estado">Estado: </label>
                 <select name="estado" id="estado">
                     <option value="">--Escolha um Estado--</option>
-                    <option value="Limpo">Limpo</option>
-                    <option value="Semi-Limpo">Semi-Limpo</option>
-                    <option value="Sujo">Sujo</option>
+                    <!-- O value guarda id da Base de Dados  -->
+                    <option value=1>Limpo</option>
+                    <option value=2>Semi-Limpo</option>
+                    <option value=3>Sujo</option>
                 </select>
             </div>
             <br>
@@ -56,13 +57,48 @@
                 <label for="categoria">Categoria: </label>
                 <select name="categoria" id="categoria">
                     <option value="">--Escolha uma Categoria--</option>
-                    <option value="Parque Natural">Parque Natural</option>
-                    <option value="Zonas Habitadas">Zonas Habitadas</option>
-                    <option value="Zona Agrícola">Zona Agrícola</option>
+                     <!-- O value guarda id da Base de Dados  -->
+                    <option value=1>Parque Natural</option>
+                    <option value=2>Zonas Habitadas</option>
+                    <option value=3>Zona Agrícola</option>
                 </select>
             </div>           
 
             <button onclick = 'filtrarFotos()' id = "botaoFiltrar" type="button" class="filter-btn">Filtrar</button>
+        </div>
+        <div id='uploadImg'>
+            <h1>Upload Foto</h1><br>
+            <div class="select">
+                <label for="estado">Estado: </label>
+                <select name="estadoUpload" id="estadoUpload">
+                    <option value="">--Escolha um Estado--</option>
+                     <!-- O value guarda id da Base de Dados  -->
+                    <option value=1>Limpo</option>
+                    <option value=2>Semi-Limpo</option>
+                    <option value=3>Sujo</option>
+                </select>
+            </div>
+            <br>
+            <div class="select">
+                <label for="categoria">Categoria: </label>
+                <select name="categoriaUpload" id="categoriaUpload">
+                    <option value="">--Escolha uma Categoria--</option>
+                     <!-- O value guarda id da Base de Dados  -->
+                    <option value=1>Parque Natural</option>
+                    <option value=2>Zonas Habitadas</option>
+                    <option value=3>Zona Agrícola</option>
+                </select>
+            </div>
+            <br>
+            <div class="select">
+                <label for="categoria">Coordenadas: </label>
+                <input type="text" id="latUpload" name="latUpload">
+                <input type="text" id="lngUpload" name="lngUpload">
+            </div>
+            <br>    
+            <input type='file' id='input_img'>
+            <br>
+            <button onclick='uploadImg()' id='botaoUmploadImg' type='button' class="filter-btn">Upload</button>
         </div>
         <div id="modal">
             <div id="conteudoModel" class="modal-content">
@@ -84,7 +120,6 @@
           
           </div>
     </main>
-
 
 
     <!-- Rodapé -->

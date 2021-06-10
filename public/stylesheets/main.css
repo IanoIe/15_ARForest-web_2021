@@ -81,15 +81,21 @@ body {
     height: 400px;
 }
 
+#uploadImg {
+    position: absolute;
+    right: 50px;
+    margin-top: 200px;
+}
+
 .filter-btn{
     position: absolute;
-    bottom: 140px;
     right: 10px;
     border-top: 100px;
     padding: 10px 30px;
     cursor: pointer;
-    display: block;
-    margin: auto;
+    margin-top: 50px;
+    margin-left: 50%;
+    margin-right: 50%;
     background: linear-gradient(to right,#97d5e7,#69d372);
     border: 0;
     outline: none;

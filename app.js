@@ -19,6 +19,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/auth', loginRouter);
 app.use('/api/carregarFotos', fotografiasRouter);
-//app.use('/api/utilizador', utilizadorRouter);
+app.use('/api/utilizador', utilizadorRouter);
 
 module.exports = app;

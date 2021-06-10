@@ -1,11 +1,17 @@
 var marcadores = []
 var fotos = []
 var mapa
+var coordPopup = L.popup()
 
 var conteudoModel
-var conteudoImagem;
-var descricaoModel;
-var comentariosModel;
+var conteudoImagem
+var descricaoModel
+var comentariosModel
+
+var estadoImgUpload
+var categoriaImgUpload
+var latImgUpload
+var lngImgUpload
 
 window.onload = function(){
     document.getElementById('nomeUtilizador').innerHTML = localStorage.getItem('nomeUtilizador')
@@ -13,6 +19,12 @@ window.onload = function(){
     conteudoImagem = document.getElementById("conteudoImagem")
     descricaoModel = document.getElementById("descricao")
     comentariosModel = document.getElementById("comentarios")
+
+    estadoImgUpload = document.getElementById('estadoUpload')
+    categoriaImgUpload = document.getElementById('categoriaUpload')
+    latImgUpload = document.getElementById('latUpload')
+    lngImgUpload = document.getElementById('lngUpload')
+
     // função para fechar janela popup na cruz
     document.getElementById("botaoFechar").onclick = function() {
         limparJanelaValidarFoto()
@@ -140,6 +152,48 @@ function carregaFotosMapa(fotos){
     }
 }
 
+function uploadImg(){
+    var file = document.getElementById('input_img');
+    var form = new FormData();
+    form.append('image', file.files[0])
+
+    $.ajax(
+        {
+            'url': 'https://api.imgbb.com/1/upload?key=d54931f6597af555fc8dfdbb69742ceb',
+            'method': 'POST',
+            'timeout': 0,
+            'processData': false,
+            'mimeType': 'multipart/form-data',
+            'contentType': false,
+            'data': form
+        }
+    ).done(function(rep){
+        console.log(rep)
+        var jx = JSON.parse(rep)
+        uploadFotoBD(localStorage.getItem('idUtilizador'), jx.data.url)
+    })
+}
+
+function uploadFotoBD(idAutor, url){
+    $.ajax({
+        url: '/api/utilizador/'+idAutor+'/fotos/upload', 
+        method: 'post',
+        data: {
+            estado: estadoImgUpload.value,
+            categoria: categoriaImgUpload.value,
+            lat: latImgUpload.value,
+            lng: lngImgUpload.value,
+            url: url
+        },
+        success: function(result, status) {
+            console.log('Success')
+        },
+        error: function(errorThrown) {
+            console.log(status);
+        }
+    })
+}
+
 function filtrarFotos(){
     console.log(fotos)
     var selectEstado = document.getElementById('estado').value
@@ -188,6 +242,14 @@ function carregarMapa(){
                       /**Cordenadas da localização de Santos */
         mapa.setView([38.70689937357626, -9.155871477142364], 8);
     }
+    mapa.on('click', function(e){
+        coordPopup
+                .setLatLng(e.latlng) 
+                .setContent(e.latlng.toString())
+                .openOn(this)
+        latImgUpload.value = e.latlng.lat
+        lngImgUpload.value = e.latlng.lng
+    })
 }
 
 function carregarFotos(){

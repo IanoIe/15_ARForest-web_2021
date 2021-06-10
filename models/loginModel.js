@@ -7,9 +7,6 @@ module.exports.login = function (obj, callback, next) {
             next(err);
         }
         else conn.query("Select idUtilizador, nomeUtilizador, Email, Senha from Utilizador where Email=? and Senha=?", [obj.Email, obj.Senha], function (err, rows) {
-            console.log("Email")
-            console.log(rows);
-            console.log(obj);
             conn.release();
             if (!(rows.length === 0)) {
                 callback({ code: 200, status: "Ok" }, rows);
