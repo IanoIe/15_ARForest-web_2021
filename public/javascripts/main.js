@@ -1,5 +1,6 @@
 var marcadores = []
 var fotos = []
+var idFoto
 var mapa
 var coordPopup = L.popup()
 
@@ -13,6 +14,8 @@ var categoriaImgUpload
 var latImgUpload
 var lngImgUpload
 
+var cores = {1:'#228B22', 2:'#9ACD32', 3:'#FFA500', 4:'#FF4500', 5:'#FF0000'}
+
 window.onload = function(){
     document.getElementById('nomeUtilizador').innerHTML = localStorage.getItem('nomeUtilizador')
     conteudoModel = document.getElementById("conteudoModel")
@@ -25,10 +28,6 @@ window.onload = function(){
     latImgUpload = document.getElementById('latUpload')
     lngImgUpload = document.getElementById('lngUpload')
 
-    // função para fechar janela popup na cruz
-    document.getElementById("botaoFechar").onclick = function() {
-        limparJanelaValidarFoto()
-    }
     // função para fechar janela popup carregando fora da janela
     window.onclick = function(event) {
         if (event.target == document.getElementById("modal")) {
@@ -42,9 +41,14 @@ window.onload = function(){
 function limparJanelaValidarFoto(){
     document.getElementById("modal").style.display = "none";
     conteudoImagem.removeChild(conteudoImagem.children[conteudoImagem.children.length-1])
+    while (comentariosModel.childNodes.length > 0){
+        comentariosModel.removeChild(comentariosModel.children[comentariosModel.children.length-1])
+    }
+    document.getElementById('caixaComentar').value = ""
 } 
 
 function abrirJanelaValidarFoto(foto){
+    idFoto = foto.idFotografias
     const img = new Image();
     img.onload = function(){
         this.height = this.height*(600/this.width)
@@ -54,39 +58,70 @@ function abrirJanelaValidarFoto(foto){
         var dia = d.getDate()
         var mes = d.getMonth()+1
         var ano = d.getFullYear()
+
+        if (foto.mediaClassificacao){
+            classi = foto.mediaClassificacao
+        }else{
+            classi = ""
+        }
+        
+        cor = cores[Math.round(foto.mediaClassificacao)]
         descricaoModel.innerHTML = "<p>Autor: "+foto.nomeAutor+"</p>"+
                                    "<p>Estado: "+foto.nomeEstado+"</p>"+
                                    "<p>Categoria: "+foto.nomeCategoria+"</p>"+
-                                   "<p>Data: "+dia+"/"+mes+"/"+ano+"</p>"
+                                   "<p>Data: "+dia+"/"+mes+"/"+ano+"</p>"+
+                                   "<div style='display: flex;flex-direction:row;'>"+
+                                        "<div style='margin-right: 10px';>Classificação:</div>"+
+                                        "<div style='color:"+cor+"; font-weight: bold;'>"+classi+"</div>"+
+                                    "</div>"
         for (i=0; i<foto.Comentarios.length; i++){
             comentario = document.createElement('div')
             comentario.classList.add("comentario")
+
+            classi = foto.Comentarios[i].Classificacao
+            cor = cores[classi]
+
             comentario.innerHTML = "<div style='display: flex; flex-direction:row; justify-content: space-between'>"+
-                                        "<div style='font-weight:bold'>"+foto.Comentarios[i].Titulo+"</div>"+
-                                        "<div style='color:green'>"+5+"</div>"+
+                                        "<div style= 'font-weight: bold; color:"+cor+"'>"+foto.Comentarios[i].Classificacao+"</div>"+
                                     "</div>"+
                                     "<p style='font-size:12px'>"+foto.Comentarios[i].Texto+"</p>"
             comentariosModel.appendChild(comentario)
+        }
+        /* A condição que não pemeter o utilizador comemnte as suas fotos */
+        if (parseInt(localStorage.getItem('idUtilizador')) != foto.idUtilizador){
+            document.getElementById('formClassComen').style.display = 'block'
+        }else{
+            document.getElementById('formClassComen').style.display = 'none'
         }
         document.getElementById("modal").style.display = "block" 
     }
     img.src = foto.Url
 }
 
-function submeterComentario(idUtilizador, idFoto, comentario){
+function submeterClassComen(){
+    idUtilizador = localStorage.getItem('idUtilizador')
+    idFotografia = idFoto
+    classi = document.getElementById('classificar').value
+    coment = document.getElementById('caixaComentar').value
+    enviarClassComen(idUtilizador, idFotografia, classi, coment)
+    limparJanelaValidarFoto()
+    alert("Comentário submetido com sucesso")
+    location.reload();
+}
+
+function enviarClassComen(idUtilizador, idFoto, classi, comentario){
     $.ajax({
-        url: '/api/auth/register', 
+        url: '/api/fotos/'+idFoto, 
         method: 'post',
         data: {
-            Nome:document.getElementById("nome").value,
-            Email:document.getElementById("emailRegistar").value,
-            Senha:document.getElementById("senha").value,
+            idUtilizador: idUtilizador,
+            classificacao: classi,
+            comentario: comentario,
         },
         success: function(result, status) {
             console.log('Success')
-            window.location = "login.html";
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function(errorThrown) {
             console.log(errorThrown);
         }
     })
@@ -125,14 +160,10 @@ function carregaFotosMapa(fotos){
 
         textPopup = document.createElement("div")
         var d = new Date(fotos[i].Data)
-        var dia = d.getDate()
-        var mes = d.getMonth()+1
-        var ano = d.getFullYear()
         textPopup.innerHTML = "<ul>"+
-                 "<li>Autor: "+fotos[i].nomeAutor+"</li>"+
-                 "<li>Estado: "+fotos[i].nomeEstado+"</li>"+
-                 "<li>Categoria: "+fotos[i].nomeCategoria+"</li>"+
-                 "<li>Data: "+dia+"/"+mes+"/"+ano+"</li>"+
+                                "<li>Autor: "+fotos[i].nomeAutor+"</li>"+
+                                "<li>Estado: "+fotos[i].nomeEstado+"</li>"+
+                                "<li>Categoria: "+fotos[i].nomeCategoria+"</li>"+
                                "</ul>"
         infoPopup = document.createElement("div")
         infoPopup.appendChild(imagemPopup)
@@ -168,7 +199,6 @@ function uploadImg(){
             'data': form
         }
     ).done(function(rep){
-        console.log(rep)
         var jx = JSON.parse(rep)
         uploadFotoBD(localStorage.getItem('idUtilizador'), jx.data.url)
     })
@@ -192,6 +222,8 @@ function uploadFotoBD(idAutor, url){
             console.log(status);
         }
     })
+    alert("Fotografia guardada com sucesso")
+    location.reload();
 }
 
 function filtrarFotos(){
@@ -202,15 +234,15 @@ function filtrarFotos(){
     
     var filtro = {}
     if (selectEstado != ""){
-        filtro.nomeEstado = selectEstado
+        filtro.idEstado = parseInt(selectEstado)
     }
     if (selectCategoria != ""){
-        filtro.nomeCategoria = selectCategoria
+        filtro.idCategoria = parseInt(selectCategoria)
     }
     if (textAutor != ""){
         filtro.nomeAutor = textAutor
     }
-    
+    console.log(filtro)
     fotosFiltradas = []
     var fotoPassa = true
     for (i = 0; i < fotos.length; i++){
@@ -234,14 +266,8 @@ function carregarMapa(){
     var tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     var tiles = L.tileLayer(tileUrl, { attribution });
     tiles.addTo(mapa);
-    if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(function (position) {
-            mapa.setView([position.coords.latitude, position.coords.longitude], 8);
-        })
-    }else{
-                      /**Cordenadas da localização de Santos */
-        mapa.setView([38.70689937357626, -9.155871477142364], 8);
-    }
+    /**Cordenadas da localização de Madrid */
+    mapa.setView([40.36328834091583, -3.6254882812500004], 6);
     mapa.on('click', function(e){
         coordPopup
                 .setLatLng(e.latlng) 
@@ -254,8 +280,8 @@ function carregarMapa(){
 
 function carregarFotos(){
     $.ajax({
-        url: "/api/carregarFotos/",
-        method: "get",
+        url: '/api/fotos/',
+        method: 'get',
         success: function(resultado){
             fotos = resultado;
             console.log(fotos)

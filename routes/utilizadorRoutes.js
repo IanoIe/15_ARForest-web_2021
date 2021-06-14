@@ -4,7 +4,7 @@ var utilizadorModel = require("../models/utilizadorModel");
 const {signedCookie } = require('cookie-parser');
 
 router.post('/:idUtilizador/fotos/:idFotos/comentario', function (req, res, next){
-  utilizadorModel.comentarFoto(req.params.idUtilizador, req.params.idFotos, req.body.comentario, function (status, result) {
+  utilizadorModel.comentarFoto(req.params.idUtilizador, req.params.idFotos, req.body.classi, req.body.comentario, function (status, result) {
     if (status.code == 200){
       res.send(result);
     }

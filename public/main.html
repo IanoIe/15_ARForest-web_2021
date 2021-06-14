@@ -102,18 +102,29 @@
         </div>
         <div id="modal">
             <div id="conteudoModel" class="modal-content">
-              <span id="botaoFechar">&times;</span>
+              <span id="botaoFechar" onclick="limparJanelaValidarFoto()">&times;</span>
               <div id="conteudo">
                   <div id="conteudoImagem"></div>
                   <div id="conteudoTexto">
                       <div id="descricao"></div>
                       <div id="comentarios"></div>
-                      <div style='margin: 10px auto;'>
-                          <p>Comentar:</p>
-                          <textarea id="caixaComentar"></textarea>
-                      </div>
-                      <div id="validacao"></div>
-                      <button onclick='submeterComentario()' type="button" class="submit-btn">Submeter</button>
+                      <form id='formClassComen'>
+                        <label>Classificar: </label>
+                        <select id='classificar'>
+                            <option value=1>1 - Sem Perigo</option>
+                            <option value=2>2 - Algum perigo</option>
+                            <option value=3>3 - Perigoso</option>
+                            <option value=4>4 - Muito perigoso</option>
+                            <option value=5>5 - Extremamente perigoso</option>
+                        </select>
+                        <br>
+                        <div style='margin: 10px auto;'>
+                            <p>Comentar:</p>
+                            <textarea id="caixaComentar"></textarea>
+                        </div>
+                        <br>
+                        <button id='botaoSubAval' onclick='submeterClassComen()' type="button" class="submit-btn">Submeter</button>
+                      </form>
                   </div>
               </div>
             </div>

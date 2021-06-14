@@ -116,6 +116,7 @@ body {
 
 #caixaComentar {
     width: 350px;
+    height: 100px;
 }
 
 #modal {
@@ -144,7 +145,14 @@ body {
 #conteudo {
     display: flex;
     flex-direction: row;
-    flex-flow: space-around; 
+    flex-flow: space-around;
+    z-index:1;
+}
+
+#formClassComen{
+    margin: 10px;
+    width: 320px;
+    z-index:1;
 }
 
 #conteudoTexto {
@@ -152,22 +160,20 @@ body {
     flex-direction: column;
     flex-flow: space-around;
     padding-left: 50px;
+    z-index:1;
 }
 
 #comentarios {
     margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: stretch;
     border-style: solid;
-    overflow: auto;
-    width: 350px;
+    overflow-y: scroll;
+    width: 320px;
     height: 150px;
+    z-index:1;
 }
 
 .comentario {
-    margin: 12px;
+    margin: 8px;
     border-bottom: solid;
     border-width: 0.2px;
     
@@ -180,6 +186,7 @@ body {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    z-index:5;
   }
   
 #botaoFechar:hover,
