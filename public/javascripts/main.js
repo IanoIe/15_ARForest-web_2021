@@ -14,7 +14,7 @@ var categoriaImgUpload
 var latImgUpload
 var lngImgUpload
 
-var cores = {1:'#228B22', 2:'#9ACD32', 3:'#FFA500', 4:'#FF4500', 5:'#FF0000'}
+var cores = {5:'#228B22', 4:'#9ACD32', 3:'#FFA500', 2:'#f35f29', 1:'#FF0000'}
 
 window.onload = function(){
     document.getElementById('nomeUtilizador').innerHTML = localStorage.getItem('nomeUtilizador')
@@ -69,11 +69,7 @@ function abrirJanelaValidarFoto(foto){
         descricaoModel.innerHTML = "<p>Autor: "+foto.nomeAutor+"</p>"+
                                    "<p>Estado: "+foto.nomeEstado+"</p>"+
                                    "<p>Categoria: "+foto.nomeCategoria+"</p>"+
-                                   "<p>Data: "+dia+"/"+mes+"/"+ano+"</p>"+
-                                   "<div style='display: flex;flex-direction:row;'>"+
-                                        "<div style='margin-right: 10px';>Classificação:</div>"+
-                                        "<div style='color:"+cor+"; font-weight: bold;'>"+classi+"</div>"+
-                                    "</div>"
+                                   "<p>Data: "+dia+"/"+mes+"/"+ano+"</p>"
         for (i=0; i<foto.Comentarios.length; i++){
             comentario = document.createElement('div')
             comentario.classList.add("comentario")
@@ -89,9 +85,9 @@ function abrirJanelaValidarFoto(foto){
         }
         /* A condição que não pemeter o utilizador comemnte as suas fotos */
         if (parseInt(localStorage.getItem('idUtilizador')) != foto.idUtilizador){
-            document.getElementById('formClassComen').style.display = 'block'
+            document.getElementById('comentar').style.display = 'block'
         }else{
-            document.getElementById('formClassComen').style.display = 'none'
+            document.getElementById('comentar').style.display = 'none'
         }
         document.getElementById("modal").style.display = "block" 
     }

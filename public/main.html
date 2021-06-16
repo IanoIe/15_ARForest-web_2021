@@ -12,6 +12,9 @@
         <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
         <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
         <script src="javascripts/main.js"></script>
+        <link rel="stylesheet" href="stylesheets/jquery.rating.css" />
+        <script src="javascripts/jquery.rating.js"></script>
+        <script src="javascripts/starRating.js"></script>
     </head>
 </html>
 
@@ -21,6 +24,7 @@
         <nav class="navbar">
             <ul>
               <li id="nomeUtilizador"></li>
+              <li> <a href="upload.html"></a></li>
               <li><a href="index.html">Logout</a></li>
             </ul>
           </nav>
@@ -104,27 +108,76 @@
             <div id="conteudoModel" class="modal-content">
               <span id="botaoFechar" onclick="limparJanelaValidarFoto()">&times;</span>
               <div id="conteudo">
-                  <div id="conteudoImagem"></div>
-                  <div id="conteudoTexto">
-                      <div id="descricao"></div>
-                      <div id="comentarios"></div>
-                      <form id='formClassComen'>
-                        <label>Classificar: </label>
-                        <select id='classificar'>
-                            <option value=1>1 - Sem Perigo</option>
-                            <option value=2>2 - Algum perigo</option>
-                            <option value=3>3 - Perigoso</option>
-                            <option value=4>4 - Muito perigoso</option>
-                            <option value=5>5 - Extremamente perigoso</option>
-                        </select>
-                        <br>
-                        <div style='margin: 10px auto;'>
+                  <div class="horizontal">
+                      <div class="verical">
+                            <div id="conteudoImagem"></div>
+                            <div id="conteudoTexto">
+                                <div id="descricao"></div>
+                            </div>
+                      </div>
+                      <div id="conteudoCritica">
+                        <div id="critica">
+                            <h2>Crítica</h2>
+                            <div class="horizontal">
+                                <div style='padding-right: 20px;' class="vertical">
+                                    <div id="classificacao">
+                                        <div style='font-size: 3rem;'id="mediaClassi">4.5</div>
+                                        <div id="starRating">
+                                            <input value=1 type="radio" class="star {split:4}"/>
+                                            <input value=2 type="radio" class="star {split:4}"/>
+                                            <input value=3 type="radio" class="star {split:4}"/>
+                                            <input value=4 type="radio" class="star {split:4}"/>
+                                            <input value=5 type="radio" class="star {split:4}" checked="checked"/>
+                                        </div>
+                                        <span id="totalClassi" style='font-size: 12px'>Total: </span>
+                                    </div>
+                                </div>
+                                <div style='width: 200px;' id="graficoClassi">
+                                    <div class=horizontal>
+                                        <p style="margin-right:5px;">5</p>
+                                        <div class="container">
+                                            <div class="skills classi5">90%</div>
+                                        </div>
+                                    </div>
+                                    <div class=horizontal>
+                                        <p style="margin-right:5px;">4</p>
+                                        <div class="container">
+                                            <div class="skills classi4">80%</div>
+                                        </div>
+                                    </div>
+                                    <div class=horizontal>
+                                        <p style="margin-right:5px;">3</p>
+                                        <div class="container">
+                                            <div class="skills classi3">50%</div>
+                                        </div>
+                                    </div>
+                                    <div class=horizontal>
+                                        <p style="margin-right:5px;">2</p>
+                                        <div class="container">
+                                            <div class="skills classi2">20%</div>
+                                        </div>
+                                    </div>
+                                    <div class=horizontal>
+                                        <p style="padding-right:5px;">1</p>
+                                        <div class="container">
+                                            <div class="skills classi1">5%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="classificacao">
+                                
+                            </div>
+                        </div>
+                        <div id="comentarios">
+
+                        </div>
+                        <div id="comentar" style='margin: 10px auto;'>
                             <p>Comentar:</p>
                             <textarea id="caixaComentar"></textarea>
+                            <button id='botaoSubAval' onclick='submeterClassComen()' type="button" class="submit-btn">Submeter</button>
                         </div>
-                        <br>
-                        <button id='botaoSubAval' onclick='submeterClassComen()' type="button" class="submit-btn">Submeter</button>
-                      </form>
+                  </div>
                   </div>
               </div>
             </div>

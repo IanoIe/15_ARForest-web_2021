@@ -122,15 +122,15 @@ body {
 #modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    z-index: 1; 
+    padding-top: 100px; 
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
   }
   
   /* Modal Content */
@@ -142,12 +142,6 @@ body {
     width: 70%;
   }
 
-#conteudo {
-    display: flex;
-    flex-direction: row;
-    flex-flow: space-around;
-    z-index:1;
-}
 
 #formClassComen{
     margin: 10px;
@@ -155,19 +149,33 @@ body {
     z-index:1;
 }
 
-#conteudoTexto {
+.horizontal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+    z-index:1;
+}
+
+.vertical {
     display: flex;
     flex-direction: column;
-    flex-flow: space-around;
-    padding-left: 50px;
+    justify-content: space-around;
     z-index:1;
+}
+
+#starRating{
+    padding: 10px;
+}
+
+#conteudoCritica{
+    padding-left: 30px;
 }
 
 #comentarios {
     margin-top: 10px;
     border-style: solid;
     overflow-y: scroll;
-    width: 320px;
     height: 150px;
     z-index:1;
 }
@@ -196,4 +204,24 @@ body {
     cursor: pointer;
 }
 
+.container {
+    width: 100%;
+}
+
+.skills {
+    text-align: right;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: white;
+}
+  
+#graficoClassi .horizontal{
+    margin-bottom: 10px;
+}
+
+.classi5 {width: 90%; background-color: #228B22;}
+.classi4 {width: 80%; background-color: #9ACD32;}
+.classi3 {width: 65%; background-color: #FFA500;}
+.classi2 {width: 60%; background-color: #f35f29;}
+.classi1 {width: 15%; background-color: #FF0000;}
 
