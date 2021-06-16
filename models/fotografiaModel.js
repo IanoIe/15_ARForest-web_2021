@@ -13,8 +13,7 @@ module.exports.getFotos = function (obj, callback, next) {
         " Fotografias_idCategoria as idCategoria"+
         " from Fotografias inner join Categoria on idCategoria = Fotografias_idCategoria"+
         " inner join Utilizador on idUtilizador = Fotografias_idUtilizador inner join Estado on Fotografias_idEstado = idEstado"+
-        " left join Comentarios on Comentarios_idFotografias = idFotografias order by idFotografias;"
-        
+        " left join Comentarios on Comentarios_idFotografias = idFotografias order by idFotografias;"        
         var values = [];
         if (obj){
             isFirst = true;
@@ -91,5 +90,3 @@ function inserirMediaClassi(rows){
         }
     }
 }
-
-
