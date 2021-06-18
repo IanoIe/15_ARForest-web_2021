@@ -11,10 +11,15 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
         <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
         <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-        <script src="javascripts/main.js"></script>
         <link rel="stylesheet" href="stylesheets/jquery.rating.css" />
         <script src="javascripts/jquery.rating.js"></script>
         <script src="javascripts/starRating.js"></script>
+        <script src="javascripts/leaflet-routing-machine.js"></script>
+        <script src="javascripts/mapa.js"></script>
+        <script src="javascripts/fotografias.js"></script>
+        <script src="javascripts/validarFotos.js"></script>
+        <script src="javascripts/main.js"></script>
+        
     </head>
 </html>
 
@@ -24,7 +29,7 @@
         <nav class="navbar">
             <ul>
               <li id="nomeUtilizador"></li>
-              <li> <a href="upload.html"></a></li>
+              <li> <a href="upload.html">Upload</a></li>
               <li><a href="index.html">Logout</a></li>
             </ul>
           </nav>
@@ -32,11 +37,7 @@
     </header>
 
     <main>
-        <div id="map">
-            <script src="javascripts/leaflet-routing-machine.js"></script>
-            <script src="javascripts/main.js"></script>
-        </div>
-
+        <div id="map"></div>
         <div id="filtros">
             <h1>Filtros</h1><br>
             <div class="select">
@@ -68,52 +69,19 @@
                 </select>
             </div>           
 
-            <button onclick = 'filtrarFotos()' id = "botaoFiltrar" type="button" class="filter-btn">Filtrar</button>
+            <button onclick = 'aplicarFiltro()' id = "botaoFiltrar" type="button" class="filter-btn">Filtrar</button>
         </div>
-        <div id='uploadImg'>
-            <h1>Upload Foto</h1><br>
-            <div class="select">
-                <label for="estado">Estado: </label>
-                <select name="estadoUpload" id="estadoUpload">
-                    <option value="">--Escolha um Estado--</option>
-                     <!-- O value guarda id da Base de Dados  -->
-                    <option value=1>Limpo</option>
-                    <option value=2>Semi-Limpo</option>
-                    <option value=3>Sujo</option>
-                </select>
-            </div>
-            <br>
-            <div class="select">
-                <label for="categoria">Categoria: </label>
-                <select name="categoriaUpload" id="categoriaUpload">
-                    <option value="">--Escolha uma Categoria--</option>
-                     <!-- O value guarda id da Base de Dados  -->
-                    <option value=1>Parque Natural</option>
-                    <option value=2>Zonas Habitadas</option>
-                    <option value=3>Zona Agrícola</option>
-                </select>
-            </div>
-            <br>
-            <div class="select">
-                <label for="categoria">Coordenadas: </label>
-                <input type="text" id="latUpload" name="latUpload">
-                <input type="text" id="lngUpload" name="lngUpload">
-            </div>
-            <br>    
-            <input type='file' id='input_img'>
-            <br>
-            <button onclick='uploadImg()' id='botaoUmploadImg' type='button' class="filter-btn">Upload</button>
-        </div>
+       
         <div id="modal">
             <div id="conteudoModel" class="modal-content">
-              <span id="botaoFechar" onclick="limparJanelaValidarFoto()">&times;</span>
+              <span id="botaoFechar">&times;</span>
               <div id="conteudo">
                   <div class="horizontal">
                       <div class="verical">
-                            <div id="conteudoImagem"></div>
-                            <div id="conteudoTexto">
-                                <div id="descricao"></div>
-                            </div>
+                          <div id="conteudoImagem"></div>
+                          <div id="conteudoTexto">
+                            <div id="descricao"></div>
+                          </div>
                       </div>
                       <div id="conteudoCritica">
                         <div id="critica">
@@ -121,13 +89,13 @@
                             <div class="horizontal">
                                 <div style='padding-right: 20px;' class="vertical">
                                     <div id="classificacao">
-                                        <div style='font-size: 3rem;'id="mediaClassi">4.5</div>
+                                        <div style='font-size: 3rem;' id="mediaClassi">4.5</div>
                                         <div id="starRating">
                                             <input value=1 type="radio" class="star {split:4}"/>
                                             <input value=2 type="radio" class="star {split:4}"/>
                                             <input value=3 type="radio" class="star {split:4}"/>
                                             <input value=4 type="radio" class="star {split:4}"/>
-                                            <input value=5 type="radio" class="star {split:4}" checked="checked"/>
+                                            <input value=5 type="radio" class="star {split:4}"/>
                                         </div>
                                         <span id="totalClassi" style='font-size: 12px'>Total: </span>
                                     </div>
@@ -165,23 +133,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="classificacao">
-                                
-                            </div>
+                            <div id="classificacao"></div>
                         </div>
-                        <div id="comentarios">
-
-                        </div>
+                        <div id="comentarios"></div>
                         <div id="comentar" style='margin: 10px auto;'>
                             <p>Comentar:</p>
                             <textarea id="caixaComentar"></textarea>
-                            <button id='botaoSubAval' onclick='submeterClassComen()' type="button" class="submit-btn">Submeter</button>
+                            <button id='botaoSubAval' onclick='submeterClassiComen()' type="button" class="submit-btn">Submeter</button>
                         </div>
                   </div>
                   </div>
               </div>
             </div>
-          
           </div>
     </main>
 

@@ -63,19 +63,23 @@ module.exports.getFotos = function (obj, callback, next) {
     })
 }
 
-module.exports.postClassComen = function (idUtilizador, idFoto, classificacao, comentario, callback){
+module.exports.postClassiComen = function (idUtilizador, idFoto, classificacao, comentario, callback){
+    console.log(classificacao)
     mysql.getConnection(function(err, conn){
         if(err){
             conn.release();
             next(err);
-        }
-        else conn.query('insert into Comentarios (Comentarios_idUtilizador, Comentarios_idFotografias, Classificacao, Texto) values (?,?,?,?)', 
+        }else{
+            conn.query('insert into Comentarios (Comentarios_idUtilizador, Comentarios_idFotografias, Classificacao, Texto) values (?,?,?,?)', 
                         [idUtilizador, idFoto, classificacao, comentario], function (err, rows){
             conn.release();
             if (err) {
                 callback({code: 401, status: err}, null);
+            }else{
+                callback({code: 200, status: 'Ok'}, rows);
             }
-        })
+            })
+        }
     })
 }
 

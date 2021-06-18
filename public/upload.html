@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="uft-8">
+        <title>ARForest Web | Página de Upload</title>
+        <link rel="icon" href="images/logo.PNG">
+        <link rel="stylesheet" href="stylesheets/upload.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+        <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+        <script src="javascripts/mapa.js"></script>
+        <script src="javascripts/upload.js"></script>
+    </head>
+</html>
+
+<body>
+    <header>
+        <div class="logo"><a href="main.html"><img src="images/logo.PNG"></a></div>
+        <nav class="navbar">
+            <ul>
+              <li id="nomeUtilizador"></li>
+              <li> <a href="main.html">Inicio</a></li>
+              <li><a href="index.html">Logout</a></li>
+            </ul>
+          </nav>
+          <div class="fas fa-bars"></div>
+    </header>
+
+    <main>
+        <div id="map">
+            <script src="javascripts/leaflet-routing-machine.js"></script>
+        </div>
+
+        <div id='uploadImg'>
+            <h1>Upload Foto</h1><br>
+            <div class="select">
+                <label for="estado">Estado: </label>
+                <select name="estadoUpload" id="estadoUpload">
+                    <option value="">--Escolha um Estado--</option>
+                     <!-- O value guarda id da Base de Dados  -->
+                    <option value=1>Limpo</option>
+                    <option value=2>Semi-Limpo</option>
+                    <option value=3>Sujo</option>
+                </select>
+            </div>
+            <br>
+            <div class="select">
+                <label for="categoria">Categoria: </label>
+                <select name="categoriaUpload" id="categoriaUpload">
+                    <option value="">--Escolha uma Categoria--</option>
+                     <!-- O value guarda id da Base de Dados  -->
+                    <option value=1>Parque Natural</option>
+                    <option value=2>Zonas Habitadas</option>
+                    <option value=3>Zona Agrícola</option>
+                </select>
+            </div>
+            <br>
+            <div class="select">
+                <label for="categoria">Coordenadas: </label>
+                <input type="text" id="latUpload" name="latUpload">
+                <input type="text" id="lngUpload" name="lngUpload">
+            </div>
+            <br>    
+            <input type='file' id='input_img'>
+            <br>
+            <button onclick='uploadImg()' id='botaoUmploadImg' type='button' class="filter-btn">Upload</button>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>ARForest Web, Copyright &copy; 2021</p>
+    </footer>
+</body>

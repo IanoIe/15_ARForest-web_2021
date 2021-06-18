@@ -81,11 +81,6 @@ body {
     height: 400px;
 }
 
-#uploadImg {
-    position: absolute;
-    right: 50px;
-    margin-top: 200px;
-}
 
 .filter-btn{
     position: absolute;

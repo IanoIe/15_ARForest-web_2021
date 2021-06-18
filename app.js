@@ -8,6 +8,7 @@ var loginRouter = require('./routes/loginRoutes');
 var fotografiasRouter = require("./routes/fotografiaRoutes")
 var utilizadorRouter = require("./routes/utilizadorRoutes")
 
+
 var app = express();
 
 app.use(logger('dev'));

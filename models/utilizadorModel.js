@@ -31,6 +31,8 @@ module.exports.uploadFoto = function (idUtilizador, data, callback){
             if (err) {
                 callback({code: 401, status: err}, null);
             }
+            callback({ code: 200, status: "Ok" }, rows);
         })
     })
 }
+

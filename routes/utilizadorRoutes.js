@@ -12,8 +12,8 @@ router.post('/:idUtilizador/fotos/:idFotos/comentario', function (req, res, next
       res.statusMessage = status.status;
       res.status(status.code).send({});
     }
-  });
-});
+  })
+})
 
 router.post('/:idUtilizador/fotos/upload', function (req, res, next){
   utilizadorModel.uploadFoto(req.params.idUtilizador, req.body, function (status, result) {
@@ -24,7 +24,8 @@ router.post('/:idUtilizador/fotos/upload', function (req, res, next){
       res.statusMessage = status.status;
       res.status(status.code).send(status.status);
     }
-  });
-});
+  })
+})
+
 
 module.exports = router;

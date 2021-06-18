@@ -17,8 +17,7 @@ router.get('/', function (req, res, next){
   });
 
 router.post('/:idFoto', function (req, res){
-  console.log(req.params.idFoto)
-  fotModels.postClassComen(req.body.idUtilizador, req.params.idFoto, req.body.classificacao, req.body.comentario, function (status, result) {
+  fotModels.postClassiComen(req.body.idUtilizador, req.params.idFoto, req.body.classificacao, req.body.comentario, function (status, result) {
       if (status.code == 200){
         res.send(result);
       }else {
