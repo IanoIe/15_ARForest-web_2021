@@ -66,7 +66,7 @@ header .fa-bars{
     top: 200;
     left: 0px;
     height: 100%;
-    width: 700px;
+    width: 1000px;
 }
 
 body {
@@ -76,7 +76,7 @@ body {
 #filtros{
     position: absolute;
     margin-top: 200px;
-    right: 500px;  
+    right: 100px;  
     width: 300px;
     height: 400px;
 }
@@ -203,7 +203,7 @@ body {
     width: 100%;
 }
 
-.skills {
+.barra {
     text-align: right;
     padding-top: 2px;
     padding-bottom: 2px;
@@ -214,9 +214,9 @@ body {
     margin-bottom: 10px;
 }
 
-.classi5 {width: 90%; background-color: #228B22;}
-.classi4 {width: 80%; background-color: #9ACD32;}
-.classi3 {width: 65%; background-color: #FFA500;}
-.classi2 {width: 60%; background-color: #f35f29;}
-.classi1 {width: 15%; background-color: #FF0000;}
+.classi5 {width: 0%; background-color: #228B22;}
+.classi4 {width: 0%; background-color: #9ACD32;}
+.classi3 {width: 0%; background-color: #FFA500;}
+.classi2 {width: 0%; background-color: #f35f29;}
+.classi1 {width: 0%; background-color: #FF0000;}
 

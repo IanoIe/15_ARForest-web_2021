@@ -37,7 +37,7 @@ function carregaFotosMapa(mapa, fotos, marcadores, conteudoImagem, descricaoMode
             icon.options.iconUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png'
         }
         var marcador = L.marker([fotos[i].Latitude, fotos[i].Longitude], {icon: icon}).addTo(mapa)
-        marcadores.push(marcador)
+        marcador.indexFoto = i
 
         imagemPopup = document.createElement("img");
         imagemPopup.src = fotos[i].Url
@@ -66,6 +66,10 @@ function carregaFotosMapa(mapa, fotos, marcadores, conteudoImagem, descricaoMode
         marcador.on('mouseover', function(e){
             this.openPopup()
         })
+        marcador.on('click', function(){
+            abrirJanelaValidarFoto(fotos[this.indexFoto], conteudoImagem, descricaoModel, comentariosModel)
+        })
+        marcadores.push(marcador)
     }
 }
 

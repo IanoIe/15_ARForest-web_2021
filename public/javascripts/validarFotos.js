@@ -1,4 +1,5 @@
 var idFoto
+var cores = {5:'#228B22', 4:'#9ACD32', 3:'#FFA500', 2:'#f35f29', 1:'#FF0000'}
 
 function mediaScoreFoto(foto){
     media = 0
@@ -50,8 +51,18 @@ function abrirJanelaValidarFoto(foto, conteudoImagem, descricaoModel, comentario
         }
 
         var mediaScore = mediaScoreFoto(foto)
+        cor = cores[1] 
+        for (key in cores){
+           if (mediaScore > key){
+               cor = cores[key]
+           }
+        }
        
-        document.getElementById('mediaClassi').innerText = mediaScore
+        mediaClassi = document.getElementById('mediaClassi')
+        mediaClassi.innerText = mediaScore
+        mediaClassi.style.color = cor
+
+        carregarScoreBarras(foto, {1:0, 2:0, 3:0, 4:0, 5:0})
 
         /* A condição que não pemeter o utilizador comemnte as suas fotos */
         if (parseInt(localStorage.getItem('idUtilizador')) != foto.idUtilizador){
@@ -64,6 +75,33 @@ function abrirJanelaValidarFoto(foto, conteudoImagem, descricaoModel, comentario
     img.src = foto.Url
 }
 
+function carregarScoreBarras(foto, classi){
+    total = 0
+    for(i=0; i < foto.Comentarios.length; i++){
+        valor = foto.Comentarios[i].Classificacao
+        if(valor){
+            classi[valor] += 1
+            total += 1
+        }
+    }
+    if(total > 0){
+        for(key in classi){
+            perc = (classi[key]/total)*100
+            elem = document.getElementsByClassName('classi'+key)[0]
+            elem.innerHTML =  perc + "%"
+            elem.style.width = perc + "%"
+        }
+    }
+}
+
+function limparBarras(nomeClass){
+    barras = document.getElementsByClassName(nomeClass)
+    for(i=0; i<barras.length; i++){
+        barras[i].innerHTML = '0%'
+        barras[i].style.width = '0%'
+    }
+}
+
 // Limpa imagem conteudo do model e faz-o desaparecer
 function limparJanelaValidarFoto(conteudoImagem, comentariosModel, caixaComentarios){
     document.getElementById("modal").style.display = "none";
@@ -72,6 +110,7 @@ function limparJanelaValidarFoto(conteudoImagem, comentariosModel, caixaComentar
         comentariosModel.removeChild(comentariosModel.children[comentariosModel.children.length-1])
     }
     caixaComentarios.value = ""
+    limparBarras('barra')
 }
 
 function getStarRating(){
@@ -98,7 +137,7 @@ function submeterClassiComen(){
     limparJanelaValidarFoto(conteudoImagem, comentariosModel, caixaComentarios)
     
 }
-
+ 
 function enviarClassiComen(idUtilizador, idFoto, classi, comentario){
     $.ajax({
         url: '/api/fotos/'+idFoto, 
@@ -111,7 +150,7 @@ function enviarClassiComen(idUtilizador, idFoto, classi, comentario){
         success: function(result, status) {
             console.log('Success')
             alert("Comentário submetido com sucesso")
-            //location.reload();
+            location.reload();
         },
         error: function(errorThrown) {
             console.log(errorThrown);
