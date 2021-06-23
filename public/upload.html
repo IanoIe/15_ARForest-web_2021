@@ -4,13 +4,20 @@
         <meta charset="uft-8">
         <title>ARForest Web | Página de Upload</title>
         <link rel="icon" href="images/logo.PNG">
+        <link rel="stylesheet" href="stylesheets/main.css">
         <link rel="stylesheet" href="stylesheets/upload.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
         <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
         <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+        <link rel="stylesheet" href="stylesheets/jquery.rating.css" />
+        <script src="javascripts/jquery.rating.js"></script>
+        <script src="javascripts/leaflet-routing-machine.js"></script>
         <script src="javascripts/mapa.js"></script>
+        <script src="javascripts/fotografias.js"></script>
+        <script src="javascripts/validarFotos.js"></script>
         <script src="javascripts/upload.js"></script>
     </head>
 </html>
@@ -67,6 +74,83 @@
             <br>
             <button onclick='uploadImg()' id='botaoUmploadImg' type='button' class="filter-btn">Upload</button>
         </div>
+        <div id="modal">
+            <div id="conteudoModel" class="modal-content">
+              <span id="botaoFechar">&times;</span>
+              <div id="conteudo">
+                  <div class="horizontal">
+                      <div class="verical">
+                          <div id="conteudoImagem"></div>
+                          <div id="conteudoTexto">
+                            <div id="descricao"></div>
+                          </div>
+                      </div>
+                      <div id="conteudoCritica">
+                        <div id="critica">
+                            <h2>Crítica</h2>
+                            <div class="horizontal">
+                                <div style='padding-right: 20px;' class="vertical">
+                                    <div id="classificacao">
+                                        <div style='font-size: 3rem;' id="mediaClassi"></div>
+                                        <div id="starRating">
+                                            <input value=1 type="radio" class="star {split:2}"/>
+                                            <input value=2 type="radio" class="star {split:2}"/>
+                                            <input value=3 type="radio" class="star {split:2}"/>
+                                            <input value=4 type="radio" class="star {split:2}"/>
+                                            <input value=5 type="radio" class="star {split:2}"/>
+                                        </div>
+                                        <span id="totalClassi" style='font-size: 12px'>Total: </span>
+                                    </div>
+                                </div>
+                                <div style='width: 200px;' id="graficoClassi">
+                                    <div class=horizontal>
+                                        <p style="margin-right:5px;">5</p>
+                                        <div class="barra classi5"></div>
+                                        <p class="percentagem classi5"></p>
+                                    </div>
+                                    <div class=horizontal>
+                                        <p style="margin-right:5px;">4</p>
+                                        
+                                        <div class="barra classi4"></div>
+                                        
+                                        <p class="percentagem classi4"></p>
+                                    </div>
+                                    <div class=horizontal>
+                                        <p style="margin-right:5px;">3</p>
+                                        
+                                        <div class="barra classi3"></div>
+                                        
+                                        <p class="percentagem classi3"></p>
+                                    </div>
+                                    <div class=horizontal>
+                                        <p style="margin-right:5px;">2</p>
+                                        
+                                        <div class="barra classi2"></div>
+                                        
+                                        <p class="percentagem classi2"></p>
+                                    </div>
+                                    <div class=horizontal>
+                                        <p style="padding-right:5px;">1</p>
+                                       
+                                        <div class="barra classi1"></div>
+                                        
+                                        <p class="percentagem classi1"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="classificacao"></div>
+                        </div>
+                        <div id="comentarios"></div>
+                        <div id="comentar" style='margin: 10px auto;'>
+                            <p>Comentar:</p>
+                            <textarea id="caixaComentar"></textarea>
+                            <button id='botaoSubAval' onclick='submeterClassiComen()' type="button" class="submit-btn">Submeter</button>
+                        </div>
+                  </div>
+                  </div>
+              </div>
+            </div>
+          </div>
     </main>
 
     <!-- Rodapé -->

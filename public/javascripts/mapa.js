@@ -1,5 +1,5 @@
 
-
+/**Esta função permite carregar o mapa e centraliza-lo nas coordenas que estao abaixo, neste caso coordenadas de Madrid */
 function carregarMapa(idElement){
     var mapa = L.map(idElement)
     var attribution = '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors';

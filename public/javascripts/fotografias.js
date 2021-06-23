@@ -1,9 +1,19 @@
 var fotos
 var marcadores = []
 
-function carregarFotos(mapa, conteudoImagem, descricaoModel, comentariosModel){
+
+/** A função que carrega as fotografias e assim como os dados relacionados a elas  */
+function carregarFotos(mapa, conteudoImagem, descricaoModel, comentariosModel, params){
+    url = '/api/fotos/'
+    if(params){
+        url+='?'
+        for(p in params){
+            url+=p+'='+params[p]+'&'
+        }
+        url = url.slice(0,-1)
+    }
     $.ajax({
-        url: '/api/fotos/',
+        url: url,
         method: 'get',
         success: function(resultado){
             fotos = resultado;
@@ -13,6 +23,7 @@ function carregarFotos(mapa, conteudoImagem, descricaoModel, comentariosModel){
     })
 }
 
+/** A função que carrega as fotografias, marcadores (pontos) e assim como as descrições, comentarios no mapa */
 function carregaFotosMapa(mapa, fotos, marcadores, conteudoImagem, descricaoModel, comentariosModel){
     // Apagar os punto no mapa antes de preencher de novo
     marcadores.forEach(function(m){
@@ -73,6 +84,7 @@ function carregaFotosMapa(mapa, fotos, marcadores, conteudoImagem, descricaoMode
     }
 }
 
+/** A função para filtrar as fotografias  */
 function filtrarFotos(filtro, fotos){
     
     fotosFiltradas = []
@@ -91,6 +103,7 @@ function filtrarFotos(filtro, fotos){
     return fotosFiltradas
 }
 
+/**A função para criar filtro e permitir que seja executada conformo ao estado, categoria e autor  */
 function criarFiltro(){
     var selectEstado = document.getElementById('estado').value
     var selectCategoria = document.getElementById('categoria').value
@@ -109,6 +122,7 @@ function criarFiltro(){
     return filtro
 }
 
+/**A função que permite aplicar filtro criada na função anterior  */
 function aplicarFiltro(){
     filtro = criarFiltro()
     fotosFiltradas = filtrarFotos(filtro, fotos)

@@ -16,6 +16,7 @@ window.onload = function(){
             limparJanelaValidarFoto(conteudoImagem, comentariosModel, caixaComentarios)
         }
     }
+    // função que permite fechar a janela clicando na cruz (x) com rato
     document.getElementById('botaoFechar').addEventListener('click', function(){
         limparJanelaValidarFoto(conteudoImagem, comentariosModel, caixaComentarios)})
     

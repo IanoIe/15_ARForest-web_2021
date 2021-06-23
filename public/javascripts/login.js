@@ -1,3 +1,4 @@
+/**Esta função permite utilizador fazer login usando email e respetiva senha ja criada no registo */
 function entrar(){
     $.ajax({
         url: '/api/auth/login',
@@ -18,6 +19,7 @@ function entrar(){
     })
 }
 
+/**A função que permite criar registo de um utilizador, preenchendo os dados pedidos, nome, email, senha */
 function registar(){
     $.ajax({
         url: '/api/auth/register', 

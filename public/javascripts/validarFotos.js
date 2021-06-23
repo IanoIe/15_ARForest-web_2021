@@ -36,6 +36,7 @@ function abrirJanelaValidarFoto(foto, conteudoImagem, descricaoModel, comentario
                                    "<p>Estado: "+foto.nomeEstado+"</p>"+
                                    "<p>Categoria: "+foto.nomeCategoria+"</p>"+
                                    "<p>Data: "+dia+"/"+mes+"/"+ano+"</p>"
+        var numComentarios = 0
         for (i=0; i<foto.Comentarios.length; i++){
            var comentario = document.createElement('div')
             comentario.classList.add("comentario")
@@ -48,8 +49,9 @@ function abrirJanelaValidarFoto(foto, conteudoImagem, descricaoModel, comentario
                                     "</div>"+
                                     "<p style='font-size:12px'>"+foto.Comentarios[i].Texto+"</p>"
             comentariosModel.appendChild(comentario)
+            numComentarios += 1
         }
-
+        document.getElementById('totalClassi').innerText = 'Total avaliações: '+numComentarios
         var mediaScore = mediaScoreFoto(foto)
         cor = cores[1] 
         for (key in cores){
@@ -87,9 +89,10 @@ function carregarScoreBarras(foto, classi){
     if(total > 0){
         for(key in classi){
             perc = (classi[key]/total)*100
-            elem = document.getElementsByClassName('classi'+key)[0]
-            elem.innerHTML =  perc + "%"
-            elem.style.width = perc + "%"
+            elemBarra = document.getElementsByClassName('barra classi'+key)[0]
+            elemBarra.style.width = perc + "%"
+            elemPerc = document.getElementsByClassName('percentagem classi'+key)[0]
+            elemPerc.innerHTML =  perc + "%"
         }
     }
 }
@@ -97,8 +100,14 @@ function carregarScoreBarras(foto, classi){
 function limparBarras(nomeClass){
     barras = document.getElementsByClassName(nomeClass)
     for(i=0; i<barras.length; i++){
-        barras[i].innerHTML = '0%'
         barras[i].style.width = '0%'
+    }
+}
+
+function limparPercentagem(nomeClass){
+    percentagens = document.getElementsByClassName(nomeClass)
+    for(i=0; i<percentagens.length; i++){
+        percentagens[i].innerHTML = '0%'
     }
 }
 
@@ -111,6 +120,7 @@ function limparJanelaValidarFoto(conteudoImagem, comentariosModel, caixaComentar
     }
     caixaComentarios.value = ""
     limparBarras('barra')
+    limparPercentagem('percentagem')
 }
 
 function getStarRating(){

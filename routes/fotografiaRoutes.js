@@ -6,7 +6,8 @@ var fotModels = require("../models/fotografiaModel");
 
 /* GET all Fotografias */
 router.get('/', function (req, res, next){
-  fotModels.getFotos(req.params, function (status, result) {
+  console.log(req.query)
+  fotModels.getFotos(req.query, function (status, result) {
       if (status.code == 200)
       res.send(result);
     else {

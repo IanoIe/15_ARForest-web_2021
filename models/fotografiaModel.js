@@ -13,7 +13,7 @@ module.exports.getFotos = function (obj, callback, next) {
         " Fotografias_idCategoria as idCategoria"+
         " from Fotografias inner join Categoria on idCategoria = Fotografias_idCategoria"+
         " inner join Utilizador on idUtilizador = Fotografias_idUtilizador inner join Estado on Fotografias_idEstado = idEstado"+
-        " left join Comentarios on Comentarios_idFotografias = idFotografias order by idFotografias;"        
+        " left join Comentarios on Comentarios_idFotografias = idFotografias"        
         var values = [];
         if (obj){
             isFirst = true;
@@ -22,11 +22,13 @@ module.exports.getFotos = function (obj, callback, next) {
                 if (!isFirst){
                     query += " and ";
                 } else {
+                    query += " where "
                     isFirst = false; 
                 }
                 query += key + "=?";
             }
-        }       
+        }
+        query+=" order by idFotografias"       
         conn.query(query, values, function (err, rows) {
             conn.release();
             if(err){

@@ -24,7 +24,7 @@ module.exports.registar = function (obj, callback, next){
             conn.release();
             next(err);
         }
-        else conn.query('INSERT INTO Utilizador(Nome, Email, Senha) VALUES(?,?,?)', [obj.Nome, obj.Email, obj.Senha], function (err, rows){
+        else conn.query('INSERT INTO Utilizador(nomeUtilizador, Email, Senha) VALUES(?,?,?)', [obj.Nome, obj.Email, obj.Senha], function (err, rows){
             conn.release();
             if(!(rows.length === 0)){
                 callback({code: 200, status: "Ok"},rows)

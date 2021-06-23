@@ -9,7 +9,6 @@
     font-family: 'Open Sans', sans-serif;
     margin:0; padding:0;
     box-sizing: border-box;
-    text-transform: capitalize;
     text-decoration: none;
     transition: all .5s cubic-bezier(.37,1.14,.26,1.24);
 }
@@ -148,7 +147,6 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    
     z-index:1;
 }
 
@@ -199,19 +197,22 @@ body {
     cursor: pointer;
 }
 
-.container {
-    width: 100%;
-}
+
 
 .barra {
-    text-align: right;
     padding-top: 2px;
     padding-bottom: 2px;
-    color: white;
+}
+
+.percentagem{
+    text-align: left;
+    color: rgb(37, 37, 37);
 }
   
 #graficoClassi .horizontal{
     margin-bottom: 10px;
+    justify-content:start;
+
 }
 
 .classi5 {width: 0%; background-color: #228B22;}

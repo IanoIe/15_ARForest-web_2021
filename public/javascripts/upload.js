@@ -1,5 +1,7 @@
 var mapa
 var coordPopup = L.popup()
+var fotos
+var cores = {5:'#228B22', 4:'#9ACD32', 3:'#FFA500', 2:'#f35f29', 1:'#FF0000'}
 
 var categoriaImgUpload
 var estadoImgUpload
@@ -12,8 +14,23 @@ window.onload = function(){
     categoriaImgUpload = document.getElementById('categoriaUpload')
     estadoImgUpload = document.getElementById('estadoUpload')
 
+    var conteudoImagem = document.getElementById("conteudoImagem")
+    var descricaoModel = document.getElementById("descricao")
+    var comentariosModel = document.getElementById("comentarios")
+    var caixaComentarios = document.getElementById('caixaComentar')
+
     latImgUpload = document.getElementById('latUpload')
     lngImgUpload = document.getElementById('lngUpload')
+
+    // função para fechar janela popup carregando fora da janela e no botao de fechar
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("modal")) {
+            limparJanelaValidarFoto(conteudoImagem, comentariosModel, caixaComentarios)
+        }
+    }
+    // função que permite fechar a janela clicando na cruz (x) com rato
+    document.getElementById('botaoFechar').addEventListener('click', function(){
+        limparJanelaValidarFoto(conteudoImagem, comentariosModel, caixaComentarios)})
 
     mapa = carregarMapa('map');
     mapa.on('click', function(e){
@@ -24,11 +41,12 @@ window.onload = function(){
         latImgUpload.value = e.latlng.lat
         lngImgUpload.value = e.latlng.lng
     })
+    params = {Fotografias_idUtilizador: localStorage.getItem('idUtilizador')}
+    carregarFotos(mapa, conteudoImagem, descricaoModel, comentariosModel, params);
 }
 
 
-
-/** Função que permite fazer upload da imgaem */
+/** Função que permite fazer upload da imgaem, guardando no Imgbb */
 function uploadImg(){
     var file = document.getElementById('input_img');
     var form = new FormData();
@@ -50,8 +68,7 @@ function uploadImg(){
     })
 }
 
-/** Função que enviar imagens a base de dados */
-
+/** Função que permite enviar imagens a base de dados */
 function uploadFotoBD(idAutor, url){
     $.ajax({
         url: '/api/utilizador/'+idAutor+'/fotos/upload', 
