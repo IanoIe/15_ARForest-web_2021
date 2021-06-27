@@ -2,13 +2,17 @@ var mapa
 var coordPopup = L.popup()
 
 var cores = {5:'#228B22', 4:'#9ACD32', 3:'#FFA500', 2:'#f35f29', 1:'#FF0000'}
+var conteudoImagem
+var descricaoModel
+var comentariosModel
+var caixaComentarios
 
 window.onload = function(){
     document.getElementById('nomeUtilizador').innerHTML = localStorage.getItem('nomeUtilizador')
-    var conteudoImagem = document.getElementById("conteudoImagem")
-    var descricaoModel = document.getElementById("descricao")
-    var comentariosModel = document.getElementById("comentarios")
-    var caixaComentarios = document.getElementById('caixaComentar')
+    conteudoImagem = document.getElementById("conteudoImagem")
+    descricaoModel = document.getElementById("descricao")
+    comentariosModel = document.getElementById("comentarios")
+    caixaComentarios = document.getElementById('caixaComentar')
 
     // função para fechar janela popup carregando fora da janela e no botao de fechar
     window.onclick = function(event) {

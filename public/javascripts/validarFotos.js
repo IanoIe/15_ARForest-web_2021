@@ -19,61 +19,61 @@ function abrirJanelaValidarFoto(foto, conteudoImagem, descricaoModel, comentario
     img.onload = function(){
         this.height = this.height*(600/this.width)
         this.width = 600
-        conteudoImagem.appendChild(img)
-        var d = new Date(foto.Data)
-        var dia = d.getDate()
-        var mes = d.getMonth()+1
-        var ano = d.getFullYear()
-
-        if (foto.mediaClassificacao){
-            classi = foto.mediaClassificacao
-        }else{
-            classi = ""
-        }
-        
-        cor = cores[Math.round(foto.mediaClassificacao)]
-        descricaoModel.innerHTML = "<p>Autor: "+foto.nomeAutor+"</p>"+
-                                   "<p>Estado: "+foto.nomeEstado+"</p>"+
-                                   "<p>Categoria: "+foto.nomeCategoria+"</p>"+
-                                   "<p>Data: "+dia+"/"+mes+"/"+ano+"</p>"
-        var numComentarios = 0
-        for (i=0; i<foto.Comentarios.length; i++){
-           var comentario = document.createElement('div')
-            comentario.classList.add("comentario")
-
-            classi = foto.Comentarios[i].Classificacao
-            cor = cores[classi]
-
-            comentario.innerHTML = "<div style='display: flex; flex-direction:row; justify-content: space-between'>"+
-                                        "<div style= 'font-weight: bold; color:"+cor+"'>"+foto.Comentarios[i].Classificacao+"</div>"+
-                                    "</div>"+
-                                    "<p style='font-size:12px'>"+foto.Comentarios[i].Texto+"</p>"
-            comentariosModel.appendChild(comentario)
-            numComentarios += 1
-        }
-        document.getElementById('totalClassi').innerText = 'Total avaliações: '+numComentarios
-        var mediaScore = mediaScoreFoto(foto)
-        cor = cores[1] 
-        for (key in cores){
-           if (mediaScore > key){
-               cor = cores[key]
-           }
-        }
-       
-        mediaClassi = document.getElementById('mediaClassi')
-        mediaClassi.innerText = mediaScore
-        mediaClassi.style.color = cor
-
-        carregarScoreBarras(foto, {1:0, 2:0, 3:0, 4:0, 5:0})
-
-        /* A condição que não pemeter o utilizador comemnte as suas fotos */
-        if (parseInt(localStorage.getItem('idUtilizador')) != foto.idUtilizador){
-            document.getElementById('comentar').style.display = 'block'
-        }else{
-            document.getElementById('comentar').style.display = 'none'
-        }
-        document.getElementById("modal").style.display = "block" 
     }
+    conteudoImagem.appendChild(img)
+    var d = new Date(foto.Data)
+    var dia = d.getDate()
+    var mes = d.getMonth()+1
+    var ano = d.getFullYear()
+
+    if (foto.mediaClassificacao){
+        classi = foto.mediaClassificacao
+    }else{
+        classi = ""
+    }
+    
+    cor = cores[Math.round(foto.mediaClassificacao)]
+    descricaoModel.innerHTML = "<p>Autor: "+foto.nomeAutor+"</p>"+
+                                "<p>Estado: "+foto.nomeEstado+"</p>"+
+                                "<p>Categoria: "+foto.nomeCategoria+"</p>"+
+                                "<p>Data: "+dia+"/"+mes+"/"+ano+"</p>"
+    var numComentarios = 0
+    for (i=0; i<foto.Comentarios.length; i++){
+        var comentario = document.createElement('div')
+        comentario.classList.add("comentario")
+
+        classi = foto.Comentarios[i].Classificacao
+        cor = cores[classi]
+
+        comentario.innerHTML = "<div style='display: flex; flex-direction:row; justify-content: space-between'>"+
+                                    "<div style= 'font-weight: bold; color:"+cor+"'>"+foto.Comentarios[i].Classificacao+"</div>"+
+                                "</div>"+
+                                "<p style='font-size:12px'>"+foto.Comentarios[i].Texto+"</p>"
+        comentariosModel.appendChild(comentario)
+        numComentarios += 1
+    }
+    document.getElementById('totalClassi').innerText = 'Total avaliações: '+numComentarios
+    var mediaScore = mediaScoreFoto(foto)
+    cor = cores[1] 
+    for (key in cores){
+        if (mediaScore > key){
+            cor = cores[key]
+        }
+    }
+    
+    mediaClassi = document.getElementById('mediaClassi')
+    mediaClassi.innerText = mediaScore
+    mediaClassi.style.color = cor
+
+    carregarScoreBarras(foto, {1:0, 2:0, 3:0, 4:0, 5:0})
+
+    /* A condição que não pemeter o utilizador comemnte as suas fotos */
+    if (parseInt(localStorage.getItem('idUtilizador')) != foto.idUtilizador){
+        document.getElementById('comentar').style.display = 'block'
+    }else{
+        document.getElementById('comentar').style.display = 'none'
+    }
+    document.getElementById("modal").style.display = "block" 
     img.src = foto.Url
 }
 
@@ -88,7 +88,8 @@ function carregarScoreBarras(foto, classi){
     }
     if(total > 0){
         for(key in classi){
-            perc = (classi[key]/total)*100
+            var perc = (classi[key]/total)*100
+            perc = perc.toFixed(0);
             elemBarra = document.getElementsByClassName('barra classi'+key)[0]
             elemBarra.style.width = perc + "%"
             elemPerc = document.getElementsByClassName('percentagem classi'+key)[0]

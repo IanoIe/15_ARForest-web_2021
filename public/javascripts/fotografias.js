@@ -126,6 +126,5 @@ function criarFiltro(){
 function aplicarFiltro(){
     filtro = criarFiltro()
     fotosFiltradas = filtrarFotos(filtro, fotos)
-    console.log(fotos)
-    carregaFotosMapa(mapa, fotosFiltradas, marcadores)
+    carregaFotosMapa(mapa, fotosFiltradas, marcadores, conteudoImagem, descricaoModel, comentariosModel)
 }

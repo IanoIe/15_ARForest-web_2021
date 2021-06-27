@@ -9,15 +9,20 @@ var estadoImgUpload
 var latImgUpload
 var lngImgUpload
 
+var conteudoImagem
+var descricaoModel
+var comentariosModel
+var caixaComentarios
+
 window.onload = function(){
     document.getElementById('nomeUtilizador').innerHTML = localStorage.getItem('nomeUtilizador')
     categoriaImgUpload = document.getElementById('categoriaUpload')
     estadoImgUpload = document.getElementById('estadoUpload')
 
-    var conteudoImagem = document.getElementById("conteudoImagem")
-    var descricaoModel = document.getElementById("descricao")
-    var comentariosModel = document.getElementById("comentarios")
-    var caixaComentarios = document.getElementById('caixaComentar')
+    conteudoImagem = document.getElementById("conteudoImagem")
+    descricaoModel = document.getElementById("descricao")
+    comentariosModel = document.getElementById("comentarios")
+    caixaComentarios = document.getElementById('caixaComentar')
 
     latImgUpload = document.getElementById('latUpload')
     lngImgUpload = document.getElementById('lngUpload')

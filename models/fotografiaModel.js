@@ -28,7 +28,7 @@ module.exports.getFotos = function (obj, callback, next) {
                 query += key + "=?";
             }
         }
-        query+=" order by idFotografias"       
+        query+=" order by idFotografias asc, idComentarios desc"       
         conn.query(query, values, function (err, rows) {
             conn.release();
             if(err){
