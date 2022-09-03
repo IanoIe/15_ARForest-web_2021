@@ -1,5 +1,6 @@
 var mysql = require('./connection').pool;
 
+
 module.exports.comentarFoto = function (idUtilizador, idFoto, classi, comentario, callback){
     mysql.getConnection(function(err, conn){
         if(err){

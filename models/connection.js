@@ -1,6 +1,7 @@
 var mysql = require('mysql');
 var util = require('util');
 
+/**Ligação a Base de Dados remotemysql */
 var pool = mysql.createPool({
     connectionLimit: 20,
     host: 'remotemysql.com',
