@@ -1,7 +1,7 @@
 var mysql = require('./connection').pool;
 
 
-/** Mostrar todas Fotografias*/
+/** Mostrar fotos Fotografias*/
 module.exports.getFotos = function (obj, callback, next) {
     mysql.getConnection(function (err, conn) {
         if (err) {

@@ -34,8 +34,8 @@ function abrirJanelaValidarFoto(foto, conteudoImagem, descricaoModel, comentario
     
     cor = cores[Math.round(foto.mediaClassificacao)]
     descricaoModel.innerHTML = "<p>Autor: "+foto.nomeAutor+"</p>"+
-                                "<p>Estado: "+foto.nomeEstado+"</p>"+
-                                "<p>Categoria: "+foto.nomeCategoria+"</p>"+
+                                "<p>Estado: "+foto.Estado+"</p>"+
+                                "<p>Categoria: "+foto.Nome+"</p>"+
                                 "<p>Data: "+dia+"/"+mes+"/"+ano+"</p>"
     var numComentarios = 0
     for (i=0; i<foto.Comentarios.length; i++){
